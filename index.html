@@ -6,16 +6,17 @@
     <title>Fieldit - Premium Golf Equipment</title>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Milocha&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Variabel warna - disesuaikan dengan tone Elvo Golf */
+        /* Variabel warna - disesuaikan dengan panduan Fieldit */
         :root {
-            --dark-green: #1a3c34;
-            --light-green: #2a8c5e;
-            --gold: #d4af37;
-            --cream: #f8f5f0;
+            --fieldit-navy: #082147;
+            --fieldit-mint: #40E89B;
             --white: #ffffff;
+            --cream: #f8f5f0;
             --gray: #6b7280;
             --dark-gray: #374151;
         }
@@ -68,7 +69,7 @@
         
         nav ul li a {
             text-decoration: none;
-            color: var(--dark-green);
+            color: var(--fieldit-navy);
             font-weight: 500;
             font-size: 14px;
             text-transform: uppercase;
@@ -77,12 +78,23 @@
         }
         
         nav ul li a:hover {
-            color: var(--light-green);
+            color: var(--fieldit-mint);
+        }
+        
+        /* Mobile Menu Toggle - HIDDEN di Desktop */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--fieldit-navy);
+            cursor: pointer;
+            z-index: 1001;
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--dark-green) 0%, var(--light-green) 100%);
+            background: linear-gradient(135deg, var(--fieldit-navy) 0%, #1a3a6b 100%);
             color: var(--white);
             padding: 180px 5% 120px;
             text-align: center;
@@ -109,9 +121,10 @@
         }
         
         .hero h1 {
+            font-family: 'Milocha', cursive;
             font-size: 3.5rem;
             margin-bottom: 20px;
-            font-weight: 700;
+            font-weight: 400;
             letter-spacing: -0.5px;
         }
         
@@ -124,8 +137,8 @@
         
         .cta-button {
             display: inline-block;
-            background-color: var(--gold);
-            color: var(--dark-green);
+            background-color: var(--fieldit-mint);
+            color: var(--fieldit-navy);
             padding: 15px 35px;
             border-radius: 30px;
             text-decoration: none;
@@ -138,7 +151,7 @@
         }
         
         .cta-button:hover {
-            background-color: #c19d2d;
+            background-color: #2ad68a;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
@@ -154,10 +167,11 @@
         }
         
         .section-title h2 {
+            font-family: 'Milocha', cursive;
             font-size: 2.5rem;
-            color: var(--dark-green);
+            color: var(--fieldit-navy);
             margin-bottom: 15px;
-            font-weight: 600;
+            font-weight: 400;
         }
         
         .section-title p {
@@ -182,10 +196,11 @@
         }
         
         .about-text h3 {
+            font-family: 'Milocha', cursive;
             font-size: 1.8rem;
-            color: var(--dark-green);
+            color: var(--fieldit-navy);
             margin-bottom: 20px;
-            font-weight: 600;
+            font-weight: 400;
         }
         
         .about-text p {
@@ -254,10 +269,11 @@
         }
         
         .product-info h3 {
+            font-family: 'Milocha', cursive;
             font-size: 1.3rem;
-            color: var(--dark-green);
+            color: var(--fieldit-navy);
             margin-bottom: 10px;
-            font-weight: 600;
+            font-weight: 400;
         }
         
         .product-info p {
@@ -268,14 +284,14 @@
         
         .product-price {
             font-size: 1.2rem;
-            color: var(--light-green);
+            color: var(--fieldit-mint);
             font-weight: 600;
             margin-bottom: 15px;
         }
         
         /* Features Section */
         .features {
-            background-color: var(--dark-green);
+            background-color: var(--fieldit-navy);
             color: var(--white);
         }
         
@@ -303,7 +319,7 @@
         .feature-icon {
             width: 70px;
             height: 70px;
-            background: var(--light-green);
+            background: var(--fieldit-mint);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -317,9 +333,10 @@
         }
         
         .feature-item h3 {
+            font-family: 'Milocha', cursive;
             font-size: 1.3rem;
             margin-bottom: 15px;
-            font-weight: 600;
+            font-weight: 400;
         }
         
         .feature-item p {
@@ -341,10 +358,11 @@
         }
         
         .contact-info h2 {
+            font-family: 'Milocha', cursive;
             font-size: 2rem;
-            color: var(--dark-green);
+            color: var(--fieldit-navy);
             margin-bottom: 20px;
-            font-weight: 600;
+            font-weight: 400;
         }
         
         .contact-info p {
@@ -364,7 +382,7 @@
         
         .contact-detail-item i {
             margin-right: 15px;
-            color: var(--light-green);
+            color: var(--fieldit-mint);
             font-size: 1.2rem;
             margin-top: 3px;
         }
@@ -384,7 +402,7 @@
         
         /* Footer */
         footer {
-            background-color: var(--dark-green);
+            background-color: var(--fieldit-navy);
             color: var(--white);
             padding: 60px 5% 30px;
         }
@@ -409,9 +427,10 @@
         }
         
         .footer-links h3, .footer-contact h3 {
+            font-family: 'Milocha', cursive;
             font-size: 1.2rem;
             margin-bottom: 20px;
-            font-weight: 600;
+            font-weight: 400;
         }
         
         .footer-links ul {
@@ -429,7 +448,7 @@
         }
         
         .footer-links ul li a:hover {
-            color: var(--light-green);
+            color: var(--fieldit-mint);
         }
         
         .footer-contact p {
@@ -478,14 +497,58 @@
             height: 30px;
         }
         
-        /* Responsive */
+        /* ==================== */
+        /* RESPONSIVE STYLES */
+        /* ==================== */
+        
+        /* Desktop - Navbar normal, toggle HIDDEN */
+        @media (min-width: 769px) {
+            .mobile-menu-toggle {
+                display: none !important;
+            }
+            
+            nav ul {
+                display: flex !important;
+            }
+        }
+        
+        /* Mobile Styles */
         @media (max-width: 768px) {
             header {
                 padding: 15px 5%;
             }
             
+            /* Mobile Navigation Styles */
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
             nav ul {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                font-size: 16px;
+                padding: 10px 0;
+                display: block;
             }
             
             .hero {
@@ -527,6 +590,20 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -534,10 +611,16 @@
     <header>
         <div class="logo">
             <!-- Logo Fieldit -->
-            <img src="assets/logo/fieldit-logo.png" alt="Fieldit Logo">
+            <img src="assets/logo/fieldit-1.png" alt="Fieldit Logo">
         </div>
+        
+        <!-- Mobile Menu Toggle - Hanya muncul di mobile -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        
         <nav>
-            <ul>
+            <ul id="navMenu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#products">Products</a></li>
@@ -550,8 +633,8 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Premium Golf Equipment</h1>
-            <p>Experience the perfect blend of performance and precision with Fieldit golf equipment</p>
+            <h1>Your Reliable Golf Mate</h1>
+            <p>Premium golf equipment with trendy design at reasonable prices. Perfect for beginners and enthusiasts alike.</p>
             <a href="#products" class="cta-button">Explore Products</a>
         </div>
     </section>
@@ -564,14 +647,14 @@
         </div>
         <div class="about-content">
             <div class="about-text">
-                <h3>Crafting Excellence Since 2020</h3>
-                <p>Fieldit is dedicated to creating high-performance golf equipment that enhances your game. Our products are designed with precision engineering and premium materials to deliver exceptional results on the course.</p>
-                <p>We combine innovative technology with traditional craftsmanship to produce golf clubs, balls, and accessories that meet the demands of both amateur and professional golfers.</p>
-                <p>Our mission is to make premium golf equipment accessible to enthusiasts at all skill levels, helping you achieve your best performance every time you play.</p>
+                <h3>필드 안에서의 모든 것</h3>
+                <p>Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.</p>
+                <p>Dengan fokus pada desain yang trendi dan kualitas terjamin, kami menyediakan produk-produk dengan harga yang masuk akal untuk pemula yang biasanya menghadapi hambatan tinggi dalam peralatan golf.</p>
+                <p>Logo kami menggunakan garis bola golf yang melambangkan planet, mencerminkan visi merek yang terus melambung tinggi. Ekspresi simbol yang ramah menurunkan hambatan akses bagi konsumen, mencerminkan identitas merek yang menyediakan peralatan golf dengan harga terjangkau dan mudah diakses.</p>
             </div>
             <div class="about-image">
                 <!-- About image placeholder -->
-                <img src="assets/about/about-image.jpg" alt="About Fieldit">
+                <img src="assets/product/merg-golfball.png" alt="Fieldit Golf Ball">
             </div>
         </div>
     </section>
@@ -585,34 +668,23 @@
         <div class="product-grid">
             <div class="product-card">
                 <div class="product-image">
-                    <img src="assets/products/driver.jpg" alt="Golf Driver">
+                    <img src="assets/pack-1.png" alt="Product A">
                 </div>
                 <div class="product-info">
-                    <h3>Premium Driver</h3>
-                    <p>Maximize your distance with our advanced driver technology featuring optimized aerodynamics and forgiveness.</p>
-                    <div class="product-price">$299.99</div>
+                    <h3>Product A</h3>
+                    <p>Maximize your distance with our advanced golf ball technology featuring optimized aerodynamics.</p>
+                    <div class="product-price">Rp 275.000</div>
                     <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;">Inquire</a>
                 </div>
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="assets/products/irons.jpg" alt="Golf Irons">
+                    <img src="assets/pack-2.png" alt="Product B">
                 </div>
                 <div class="product-info">
-                    <h3>Tour Irons Set</h3>
-                    <p>Precision-crafted irons designed for consistent performance and exceptional feel on every shot.</p>
-                    <div class="product-price">$799.99</div>
-                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;">Inquire</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/products/putter.jpg" alt="Golf Putter">
-                </div>
-                <div class="product-info">
-                    <h3>Precision Putter</h3>
-                    <p>Engineered for superior alignment and consistent roll to help you sink more putts with confidence.</p>
-                    <div class="product-price">$199.99</div>
+                    <h3>Product B</h3>
+                    <p>Precision-crafted driver designed for consistent performance and exceptional feel on every shot.</p>
+                    <div class="product-price">Rp 2.150.000</div>
                     <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;">Inquire</a>
                 </div>
             </div>
@@ -629,31 +701,31 @@
             <div class="feature-item">
                 <div class="feature-icon">
                     <!-- Icon placeholder -->
-                    <span style="color: white; font-size: 30px;">⚡</span>
+                    <span style="color: var(--fieldit-navy); font-size: 30px;">⚡</span>
                 </div>
-                <h3>Advanced Technology</h3>
-                <p>Incorporating the latest innovations in golf equipment design and materials for superior performance.</p>
+                <h3>Reasonable Price</h3>
+                <p>Produk berkualitas tinggi dengan harga terjangkau untuk semua kalangan pemain golf.</p>
             </div>
             <div class="feature-item">
                 <div class="feature-icon">
-                    <span style="color: white; font-size: 30px;">🎯</span>
+                    <span style="color: var(--fieldit-navy); font-size: 30px;">🎯</span>
                 </div>
-                <h3>Precision Engineering</h3>
-                <p>Every product is meticulously crafted to ensure consistent quality and optimal performance on the course.</p>
+                <h3>Trendy Design</h3>
+                <p>Desain terkini yang stylish dan modern untuk penampilan terbaik di lapangan golf.</p>
             </div>
             <div class="feature-item">
                 <div class="feature-icon">
-                    <span style="color: white; font-size: 30px;">⭐</span>
+                    <span style="color: var(--fieldit-navy); font-size: 30px;">⭐</span>
                 </div>
-                <h3>Premium Materials</h3>
-                <p>Using only the highest quality materials to ensure durability, performance, and exceptional feel.</p>
+                <h3>Premium Quality</h3>
+                <p>Material terbaik dan teknologi mutakhir untuk performa optimal saat bermain golf.</p>
             </div>
             <div class="feature-item">
                 <div class="feature-icon">
-                    <span style="color: white; font-size: 30px;">🏆</span>
+                    <span style="color: var(--fieldit-navy); font-size: 30px;">🏆</span>
                 </div>
-                <h3>Proven Performance</h3>
-                <p>Trusted by amateur and professional golfers alike for consistent results and game improvement.</p>
+                <h3>Easy Access</h3>
+                <p>Membuat golf dapat diakses oleh semua orang dengan produk yang mudah didapatkan.</p>
             </div>
         </div>
     </section>
@@ -713,9 +785,10 @@
         <div class="footer-content">
             <div class="footer-about">
                 <div class="footer-logo">
-                    <img src="assets/logo/fieldit-logo-white.png" alt="Fieldit Logo">
+                    <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo" style="width: 100px; height: 100px;">
                 </div>
-                <p>Fieldit is a premium golf equipment manufacturer dedicated to creating high-performance products that enhance your game. We combine innovative technology with expert craftsmanship to deliver exceptional results on the course.</p>
+                <p>Fieldit is your reliable golf mate, providing trendy golf equipment at reasonable prices. We believe everyone should have access to quality golf gear regardless of skill level.</p>
+                <p>필드 안에서의 모든 것 - Everything in the field</p>
             </div>
             <div class="footer-links">
                 <h3>Quick Links</h3>
@@ -735,7 +808,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2024 Fieldit. All rights reserved. | Premium Golf Equipment</p>
+            <p>&copy; 2024 Fieldit. All rights reserved. | Branding Guide 2024 May ver</p>
         </div>
     </footer>
 
@@ -747,6 +820,37 @@
     </div>
 
     <script>
+        // Mobile Menu Toggle Functionality
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        // Hanya tambahkan event listener jika tombol toggle ada (di mobile)
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('show');
+                
+                // Change icon based on menu state
+                const icon = mobileMenuToggle.querySelector('i');
+                if (navMenu.classList.contains('show')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('show');
+                    const icon = mobileMenuToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
+        
         // Smooth scrolling untuk navigasi
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
