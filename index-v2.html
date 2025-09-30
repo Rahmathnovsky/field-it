@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fieldit - Your Reliable Golf Mate</title>
+    
+    <!-- Load Milocha Font -->
+    <link href="https://fonts.cdnfonts.com/css/milocha" rel="stylesheet">
+    
+    <!-- Load Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    
+    <style>
+        /* Variabel warna sesuai panduan branding */
+        :root {
+            --fieldit-navy: #082147;
+            --fieldit-mint: #40E89B;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Terapkan Milocha Regular untuk semua elemen */
+        body {
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            color: var(--fieldit-navy);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--white);
+            padding: 1px 2%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 100px;
+            width: auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--fieldit-navy);
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--fieldit-mint);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: var(--fieldit-mint);
+            padding: 150px 5% 100px;
+            text-align: center;
+            color: var(--fieldit-navy);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 15px;
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 5%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+        }
+        
+        .about {
+            background-color: var(--white);
+        }
+        
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        
+        .products {
+            background-color: var(--light-gray);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: var(--fieldit-mint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-info {
+            padding: 20px;
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .brand-applications {
+            background-color: var(--white);
+        }
+        
+        .application-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .application-item {
+            text-align: center;
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+        }
+        
+        .application-item h3 {
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .application-item img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* Contact Section - Updated with Maps */
+        .contact {
+            background-color: var(--fieldit-navy);
+            color: var(--white);
+            padding: 80px 5%;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        
+        .contact-info {
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+        }
+        
+        .contact-info h2 {
+            text-align: left;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .contact-details {
+            margin: 30px 0;
+        }
+        
+        .contact-detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-detail-item i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .btn {
+            background-color: var(--fieldit-mint);
+            color: var(--fieldit-navy);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #2ad689;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--fieldit-navy);
+            color: var(--white);
+            padding: 40px 5%;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo img {
+            height: 150px;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            margin-left: 20px;
+            text-decoration: none;
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            width: 100%;
+            font-size: 0.9rem;
+            font-family: 'Milocha', sans-serif;
+            font-weight: normal;
+        }
+        
+        /* Floating Buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+        }
+        
+        .floating-buttons.right {
+            left: auto;
+            right: 30px;
+        }
+        
+        .wa-button, .scroll-top {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 24px;
+        }
+        
+        .wa-button {
+            background-color: #ffffff00;
+            color: rgba(255, 255, 255, 0);
+        }
+        
+        .wa-button:hover {
+            background-color: #128c7e00;
+            transform: scale(1.1);
+        }
+        
+        .scroll-top {
+            background-color: var(--fieldit-navy);
+            color: var(--fieldit-mint);
+        }
+        
+        .scroll-top:hover {
+            background-color: var(--fieldit-mint);
+            color: var(--fieldit-navy);
+            transform: scale(1.1);
+        }
+        
+        .scroll-top.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: var(--fieldit-navy);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            font-family: 'Milocha', sans-serif;
+        }
+        
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--fieldit-navy);
+        }
+        
+        .wa-button:hover .tooltip,
+        .scroll-top:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-links {
+                margin-top: 20px;
+            }
+            
+            .footer-links a {
+                margin: 0 10px;
+            }
+            
+            /* Responsive contact section */
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .contact-info h2 {
+                text-align: center;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+            
+            /* Responsive untuk floating buttons */
+            .floating-buttons {
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .floating-buttons.right {
+                right: 20px;
+            }
+            
+            .wa-button, .scroll-top {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="assets/logo/fieldit-1.png" alt="Fieldit Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#products">Produk</a></li>
+                <li><a href="#applications">Brand</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>fieldit</h1>
+        <p>Your reliable golf mate</p>
+        <p>필드 안에서의 모든 것</p>
+        <p>Golf equipment with reasonable prices for everyone</p>
+    </section>
+
+    <!-- Tentang Kami -->
+    <section id="about" class="about">
+        <h2 class="section-title">Tentang Fieldit</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Fieldit adalah brand yang mengembangkan peralatan golf dengan harga terjangkau dan mudah diakses, bukan hanya untuk para profesional.</p>
+                <p>Kami menyediakan produk golf yang trendi dengan harga yang masuk akal, menghilangkan hambatan bagi para pemula.</p>
+                <p>Logo kami yang menampilkan garis bola golf yang meluncur ke angkasa melambangkan planet dan mencerminkan visi brand yang terus melambung tinggi.</p>
+            </div>
+            <div class="about-image">
+                <img src="assets/field-it-about-us.png" alt="Tentang Fieldit">
+            </div>
+        </div>
+    </section>
+
+    <!-- Produk -->
+    <section id="products" class="products">
+        <h2 class="section-title">Produk Kami</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/product/stik-golf.png" alt="Stik Golf" width="130%">
+                </div>
+                <div class="product-info">
+                    <h3>Stik Golf</h3>
+                    <p>Stik golf berkualitas dengan desain modern dan harga terjangkau untuk semua tingkat pemain.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/product/merg-golfball-1.jpg" alt="Bola Golf" width="130%">
+                </div>
+                <div class="product-info">
+                    <h3>Bola Golf</h3>
+                    <p>Bola golf dengan performa optimal dan daya tahan tinggi untuk semua tingkat pemain.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/product/tas-golf.png" alt="Tas Golf" width="150%">
+                </div>
+                <div class="product-info">
+                    <h3>Tas Golf</h3>
+                    <p>Tas golf fungsional dengan desain yang stylish dan trendi untuk kenyamanan bermain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aplikasi Brand -->
+    <section id="applications" class="brand-applications">
+        <h2 class="section-title">Our Packages</h2>
+        <div class="application-grid">
+            <div class="application-item">
+                <img src="assets/pack-1.png" alt="">
+                <h3>Super Distance A</h3>
+            </div>
+            <div class="application-item">
+                <img src="assets/pack-2.png" alt="">
+                <h3>Super Distance B</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak - Updated with Maps -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 style="color: #40e89b;">Hubungi Kami</h2>
+                <p>Untuk informasi lebih lanjut tentang produk Fieldit, silakan hubungi kami:</p>
+                
+                <div class="contact-details">
+                    <div class="contact-detail-item">
+                        <i>📧</i>
+                        <p>Email: info@fieldit.com</p>
+                    </div>
+                    <div class="contact-detail-item">
+                        <i>📞</i>
+                        <p>Telepon: +62-21-1234-5678</p>
+                    </div>
+                    <div class="contact-detail-item">
+                        <i>📍</i>
+                        <p>Alamat: Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p>
+                    </div>
+                </div>
+                
+                <p style="color: #40e89b;">Kunjungi toko kami atau hubungi melalui media sosial untuk informasi terbaru tentang produk dan promo spesial.</p>
+                
+                <!-- <button class="btn" onclick="window.open('https://wa.me/622112345678', '_blank')">Hubungi via WhatsApp</button> -->
+            </div>
+            
+            <div class="map-container">
+                <!-- Google Maps Embed -->
+                <iframe 
+                    id="map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.037215706049!2d106.87124277499668!3d-6.125923993879297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1f8a2f2f2f2f%3A0x2f2f2f2f2f2f2f2f!2sLaks%2C%20Jl.%20Yos%20Sudarso%20No.84%206%2F11%206%2C%20RT.6%2FRW.11%2C%20Sunter%20Jaya%2C%20Kec.%20Tj.%20Priok%2C%20Kota%20Jkt%20Utara%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2014360!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo">
+            </div>
+            <div class="footer-links">
+                <a href="#">Kebijakan Privasi</a>
+                <a href="#">Syarat & Ketentuan</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="copyright">
+                <p><a style="color: #40e89b;">&copy;</a> 2025 Fieldit. All rights reserved. | Designed by s</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="floating-buttons">
+        <button class="wa-button" onclick="window.open('https://wa.me/6281286506505', '_blank')">
+             <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-whatsapp-phone-icon-png-image_6315989.png" alt="" style="width: 110%;">
+            <div class="tooltip">Chat via WA</div>
+        </button>
+    </div>
+
+    <!-- Floating Scroll to Top Button -->
+    <!-- <div class="floating-buttons right">
+        <button class="scroll-top hidden" onclick="scrollToTop()">
+            <span style="font-size: 24px;">↑</span>
+            <!-- <div class="tooltip">Kembali ke Atas</div> -->
+        </button>
+    </div>
+
+    <script>
+        // Smooth scrolling untuk navigasi
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Sticky header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                header.style.backgroundColor = 'var(--white)';
+            }
+        });
+        
+        // Scroll to Top Functionality
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Show/hide scroll to top button
+        window.addEventListener('scroll', function() {
+            const scrollTopButton = document.querySelector('.scroll-top');
+            if (window.scrollY > 300) {
+                scrollTopButton.classList.remove('hidden');
+            } else {
+                scrollTopButton.classList.add('hidden');
+            }
+        });
+        
+        // Google Maps initialization
+        function initMap() {
+            // Coordinates for Jakarta (approximate location)
+            const jakarta = { lat: -6.2088, lng: 106.8456 };
+            
+            // Create a map centered at Jakarta
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: jakarta,
+                styles: [
+                    {
+                        "featureType": "all",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f5f5f5"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "all",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "color": "#082147"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "color": "#40E89B"
+                            }
+                        ]
+                    }
+                ]
+            });
+            
+            // Add a marker at the location
+            const marker = new google.maps.Marker({
+                position: jakarta,
+                map: map,
+                title: 'Fieldit Store',
+                icon: {
+                    url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" fill="#40E89B" stroke="#082147" stroke-width="2"/>
+                            <circle cx="20" cy="20" r="8" fill="#082147"/>
+                        </svg>
+                    `),
+                    scaledSize: new google.maps.Size(40, 40)
+                }
+            });
+            
+            // Add info window
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div style="font-family: 'Milocha', sans-serif; color: #082147;">
+                        <h3 style="margin: 0 0 10px 0;">Fieldit Store</h3>
+                        <p style="margin: 0;">Jl. Golf Utama No. 123, Jakarta</p>
+                        <p style="margin: 5px 0 0 0;">📞 +62-21-1234-5678</p>
+                    </div>
+                `
+            });
+            
+            marker.addListener('click', function() {
+                infoWindow.open(map, marker);
+            });
+        }
+        
+        // Fallback if Google Maps API fails
+        window.initMap = initMap;
+    </script>
+</body>
+</html>
