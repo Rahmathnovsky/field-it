@@ -129,48 +129,40 @@
                 position: relative;
             }
             
-            /* Mobile Navigation Styles */
-            .mobile-menu-toggle {
+            /* Tombol bahasa untuk mobile - muncul di sebelah kiri toggle */
+            .language-toggle-mobile {
                 display: block;
-                right: 80px; /* Memberi ruang untuk tombol bahasa */
+                position: absolute;
+                right: 70px; /* Posisi di sebelah kiri toggle */
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: 1px solid var(--fieldit-navy);
+                color: var(--fieldit-navy);
+                padding: 8px 12px;
+                border-radius: 20px;
+                cursor: pointer;
+                font-family: 'Milocha', cursive;
+                font-size: 12px;
+                z-index: 1001;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                gap: 5px;
             }
             
-            /* Tombol bahasa untuk mobile - muncul di samping toggle */
-        .language-toggle-mobile {
-            display: block;
-            position: absolute;
-            right: 70px; /* Posisi di sebelah kiri toggle */
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: 1px solid var(--fieldit-navy);
-            color: var(--fieldit-navy);
-            padding: 8px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: 'Milocha', cursive;
-            font-size: 12px;
-            z-index: 1001;
-            transition: all 0.3s;
-        }
-        
-        .language-toggle-mobile:hover {
-            background-color: var(--fieldit-navy);
-            color: var(--white);
-        }
-        
-        /* Mobile Menu Toggle - digeser ke kanan */
-        .mobile-menu-toggle {
-            display: block;
-            right: 30px; /* Kembali ke posisi semula */
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        /* Sembunyikan tombol bahasa di menu navigasi untuk mobile */
-        nav ul li .language-toggle {
-            display: none;
-        }
+            .language-toggle-mobile:hover {
+                background-color: var(--fieldit-navy);
+                color: var(--white);
+            }
+            
+            /* Mobile Menu Toggle - digeser ke kanan */
+            .mobile-menu-toggle {
+                display: block;
+                right: 30px; /* Kembali ke posisi semula */
+                top: 50%;
+                transform: translateY(-50%);
+            }
             
             /* Sembunyikan tombol bahasa di menu navigasi untuk mobile */
             nav ul li .language-toggle {
@@ -205,7 +197,44 @@
                 display: block;
             }
             
-            /* ... kode responsive lainnya tetap sama ... */
+            .hero {
+                padding: 150px 5% 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 80px 5%;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Desktop Styles - sembunyikan tombol bahasa mobile */
@@ -644,100 +673,6 @@
             height: 30px;
         }
         
-        /* ==================== */
-        /* RESPONSIVE STYLES */
-        /* ==================== */
-        
-        /* Desktop - Navbar normal, toggle HIDDEN */
-        @media (min-width: 769px) {
-            .mobile-menu-toggle {
-                display: none !important;
-            }
-            
-            nav ul {
-                display: flex !important;
-            }
-        }
-        
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 5%;
-            }
-            
-            /* Mobile Navigation Styles */
-            .mobile-menu-toggle {
-                display: block;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-                z-index: 1000;
-            }
-            
-            nav ul.show {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
-                text-align: center;
-            }
-            
-            nav ul li a {
-                font-size: 16px;
-                padding: 10px 0;
-                display: block;
-            }
-            
-            .hero {
-                padding: 150px 5% 80px;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            section {
-                padding: 80px 5%;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         @media (max-width: 480px) {
             .hero h1 {
                 font-size: 2rem;
@@ -754,7 +689,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <!-- Header -->
     <header>
         <div class="logo">
@@ -1031,6 +965,7 @@
     <script>
         // Language toggle functionality
         const languageToggle = document.getElementById('languageToggle');
+        const languageToggleMobile = document.getElementById('languageToggleMobile');
         let currentLanguage = 'id'; // Default language is Indonesian
         
         // Function to toggle language
@@ -1050,19 +985,26 @@
                 }
             });
             
-            // Update language toggle button
-            const toggleText = languageToggle.querySelector('span');
-            toggleText.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
+            // Update both language toggle buttons
+            const toggleText = languageToggle ? languageToggle.querySelector('span') : null;
+            const toggleTextMobile = languageToggleMobile ? languageToggleMobile.querySelector('span') : null;
+            
+            if (toggleText) toggleText.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
+            if (toggleTextMobile) toggleTextMobile.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
             
             // Update page title
             document.title = currentLanguage === 'id' 
-                ? 'Fieldit | Your Reliable Golf Mate' 
-                : 'Fieldit | Teman Golf Andal Anda';
+                ? 'Fieldit | Teman Golf Andal Anda' 
+                : 'Fieldit | Your Reliable Golf Mate';
         }
         
-        // Add event listener to language toggle
+        // Add event listeners to both language toggles
         if (languageToggle) {
             languageToggle.addEventListener('click', toggleLanguage);
+        }
+        
+        if (languageToggleMobile) {
+            languageToggleMobile.addEventListener('click', toggleLanguage);
         }
         
         // Mobile Menu Toggle Functionality
