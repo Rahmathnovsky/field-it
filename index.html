@@ -136,22 +136,41 @@
             }
             
             /* Tombol bahasa untuk mobile - muncul di samping toggle */
-            .language-toggle-mobile {
-                display: block;
-                position: absolute;
-                right: 30px;
-                top: 50%;
-                transform: translateY(-50%);
-                background: none;
-                border: 1px solid var(--fieldit-navy);
-                color: var(--fieldit-navy);
-                padding: 8px 12px;
-                border-radius: 20px;
-                cursor: pointer;
-                font-family: 'Milocha', cursive;
-                font-size: 12px;
-                z-index: 1001;
-            }
+        .language-toggle-mobile {
+            display: block;
+            position: absolute;
+            right: 70px; /* Posisi di sebelah kiri toggle */
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: 1px solid var(--fieldit-navy);
+            color: var(--fieldit-navy);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Milocha', cursive;
+            font-size: 12px;
+            z-index: 1001;
+            transition: all 0.3s;
+        }
+        
+        .language-toggle-mobile:hover {
+            background-color: var(--fieldit-navy);
+            color: var(--white);
+        }
+        
+        /* Mobile Menu Toggle - digeser ke kanan */
+        .mobile-menu-toggle {
+            display: block;
+            right: 30px; /* Kembali ke posisi semula */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* Sembunyikan tombol bahasa di menu navigasi untuk mobile */
+        nav ul li .language-toggle {
+            display: none;
+        }
             
             /* Sembunyikan tombol bahasa di menu navigasi untuk mobile */
             nav ul li .language-toggle {
