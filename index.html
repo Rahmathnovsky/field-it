@@ -63,6 +63,7 @@
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
         }
         
         nav ul li {
@@ -84,6 +85,27 @@
             color: var(--fieldit-mint);
         }
         
+        /* Language Toggle Button */
+        .language-toggle {
+            background: none;
+            border: 1px solid var(--fieldit-navy);
+            color: var(--fieldit-navy);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Milocha', cursive;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .language-toggle:hover {
+            background-color: var(--fieldit-navy);
+            color: var(--white);
+        }
+
         /* Mobile Menu Toggle - HIDDEN di Desktop */
         .mobile-menu-toggle {
             display: none;
@@ -93,11 +115,98 @@
             color: var(--fieldit-navy);
             cursor: pointer;
             z-index: 1001;
-            font-family: 'Milocha', cursive; /* Font Milocha untuk toggle */
+            font-family: 'Milocha', cursive;
             position: absolute;
             right: 30px;
             top: 50%;
             transform: translateY(-50%);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 5%;
+                position: relative;
+            }
+            
+            /* Mobile Navigation Styles */
+            .mobile-menu-toggle {
+                display: block;
+                right: 80px; /* Memberi ruang untuk tombol bahasa */
+            }
+            
+            /* Tombol bahasa untuk mobile - muncul di samping toggle */
+            .language-toggle-mobile {
+                display: block;
+                position: absolute;
+                right: 30px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: 1px solid var(--fieldit-navy);
+                color: var(--fieldit-navy);
+                padding: 8px 12px;
+                border-radius: 20px;
+                cursor: pointer;
+                font-family: 'Milocha', cursive;
+                font-size: 12px;
+                z-index: 1001;
+            }
+            
+            /* Sembunyikan tombol bahasa di menu navigasi untuk mobile */
+            nav ul li .language-toggle {
+                display: none;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                font-size: 16px;
+                padding: 10px 0;
+                display: block;
+            }
+            
+            /* ... kode responsive lainnya tetap sama ... */
+        }
+
+        /* Desktop Styles - sembunyikan tombol bahasa mobile */
+        @media (min-width: 769px) {
+            .language-toggle-mobile {
+                display: none !important;
+            }
+            
+            .mobile-menu-toggle {
+                display: none !important;
+            }
+            
+            nav ul {
+                display: flex !important;
+            }
+            
+            /* Tampilkan tombol bahasa di menu navigasi untuk desktop */
+            nav ul li .language-toggle {
+                display: flex;
+            }
         }
         
         /* Hero Section */
@@ -627,11 +736,18 @@
 </head>
 <body>
     <!-- Header -->
+    <!-- Header -->
     <header>
         <div class="logo">
             <!-- Logo Fieldit -->
             <img src="assets/logo/fieldit-1.png" alt="Fieldit Logo">
         </div>
+        
+        <!-- Tombol Bahasa Mobile - Hanya muncul di mobile -->
+        <button class="language-toggle-mobile" id="languageToggleMobile">
+            <i class="fas fa-globe"></i>
+            <span>ID</span>
+        </button>
         
         <!-- Mobile Menu Toggle - Hanya muncul di mobile -->
         <button class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -640,11 +756,18 @@
         
         <nav>
             <ul id="navMenu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" data-en="Home" data-id="Beranda">Beranda</a></li>
+                <li><a href="#about" data-en="About" data-id="Tentang">Tentang</a></li>
+                <li><a href="#products" data-en="Products" data-id="Produk">Produk</a></li>
+                <li><a href="#features" data-en="Features" data-id="Fitur">Fitur</a></li>
+                <li><a href="#contact" data-en="Contact" data-id="Kontak">Kontak</a></li>
+                <li>
+                    <!-- Tombol Bahasa Desktop - Hanya muncul di desktop -->
+                    <button class="language-toggle" id="languageToggle">
+                        <i class="fas fa-globe"></i>
+                        <span>ID</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -652,24 +775,39 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Your Reliable Golf Mate</h1>
-            <p>Premium golf equipment with trendy design at reasonable prices. Perfect for beginners and enthusiasts alike.</p>
-            <a href="#products" class="cta-button">Explore Products</a>
+            <h1 data-en="Your Reliable Golf Mate" data-id="Your Reliable Golf Mate">Your Reliable Golf Mate</h1>
+            <p data-en="Premium golf equipment with trendy design at reasonable prices. Perfect for beginners and enthusiasts alike." 
+               data-id="Peralatan golf premium dengan desain trendi dan harga terjangkau. Sempurna untuk pemula dan penggemar golf.">
+                Premium golf equipment with trendy design at reasonable prices. Perfect for beginners and enthusiasts alike.
+            </p>
+            <a href="#products" class="cta-button" data-en="Explore Products" data-id="Jelajahi Produk">Jelajahi Produk</a>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="section-title">
-            <h2>About Fieldit</h2>
-            <p>Discover our commitment to excellence in golf equipment manufacturing</p>
+            <h2 data-en="About Fieldit" data-id="Tentang Fieldit">Tentang Fieldit</h2>
+            <p data-en="Discover our commitment to excellence in golf equipment manufacturing" 
+               data-id="Temukan komitmen kami terhadap keunggulan dalam pembuatan peralatan golf">
+                Temukan komitmen kami terhadap keunggulan dalam pembuatan peralatan golf
+            </p>
         </div>
         <div class="about-content">
             <div class="about-text">
                 <h3>필드 안에서의 모든 것</h3>
-                <p>Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.</p>
-                <p>Dengan fokus pada desain yang trendi dan kualitas terjamin, kami menyediakan produk-produk dengan harga yang masuk akal untuk pemula yang biasanya menghadapi hambatan tinggi dalam peralatan golf.</p>
-                <p>Logo kami menggunakan garis bola golf yang melambangkan planet, mencerminkan visi merek yang terus melambung tinggi. Ekspresi simbol yang ramah menurunkan hambatan akses bagi konsumen, mencerminkan identitas merek yang menyediakan peralatan golf dengan harga terjangkau dan mudah diakses.</p>
+                <p data-en="Fieldit is a brand that develops affordable and accessible golf equipment, not for professionals. We believe that golf should be enjoyed by everyone." 
+                   data-id="Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.">
+                    Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.
+                </p>
+                <p data-en="With a focus on trendy design and guaranteed quality, we provide products at reasonable prices for beginners who usually face high barriers in golf equipment." 
+                   data-id="Dengan fokus pada desain yang trendi dan kualitas terjamin, kami menyediakan produk-produk dengan harga yang masuk akal untuk pemula yang biasanya menghadapi hambatan tinggi dalam peralatan golf.">
+                    Dengan fokus pada desain yang trendi dan kualitas terjamin, kami menyediakan produk-produk dengan harga yang masuk akal untuk pemula yang biasanya menghadapi hambatan tinggi dalam peralatan golf.
+                </p>
+                <p data-en="Our logo uses golf ball lines that symbolize the planet, reflecting the brand's vision of continuously soaring high. The friendly symbolic expression lowers access barriers for consumers, reflecting the brand identity that provides affordable and accessible golf equipment." 
+                   data-id="Logo kami menggunakan garis bola golf yang melambangkan planet, mencerminkan visi merek yang terus melambung tinggi. Ekspresi simbol yang ramah menurunkan hambatan akses bagi konsumen, mencerminkan identitas merek yang menyediakan peralatan golf dengan harga terjangkau dan mudah diakses.">
+                    Logo kami menggunakan garis bola golf yang melambangkan planet, mencerminkan visi merek yang terus melambung tinggi. Ekspresi simbol yang ramah menurunkan hambatan akses bagi konsumen, mencerminkan identitas merek yang menyediakan peralatan golf dengan harga terjangkau dan mudah diakses.
+                </p>
             </div>
             <div class="about-image">
                 <!-- About image placeholder -->
@@ -681,8 +819,11 @@
     <!-- Products Section -->
     <section id="products" class="products">
         <div class="section-title">
-            <h2>Our Products</h2>
-            <p>Explore our range of premium golf equipment</p>
+            <h2 data-en="Our Products" data-id="Produk Kami">Produk Kami</h2>
+            <p data-en="Explore our range of premium golf equipment" 
+               data-id="Jelajahi rangkaian peralatan golf premium kami">
+                Jelajahi rangkaian peralatan golf premium kami
+            </p>
         </div>
         <div class="product-grid">
             <div class="product-card">
@@ -690,10 +831,13 @@
                     <img src="assets/pack-1.png" alt="Product A">
                 </div>
                 <div class="product-info">
-                    <h3>Product A</h3>
-                    <p>Maximize your distance with our advanced golf ball technology featuring optimized aerodynamics.</p>
+                    <h3 data-en="Product A" data-id="Produk A">Produk A</h3>
+                    <p data-en="Maximize your distance with our advanced golf ball technology featuring optimized aerodynamics." 
+                       data-id="Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.">
+                        Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.
+                    </p>
                     <div class="product-price">Rp 275.000</div>
-                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;">Inquire</a>
+                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a>
                 </div>
             </div>
             <div class="product-card">
@@ -701,10 +845,13 @@
                     <img src="assets/pack-2.png" alt="Product B">
                 </div>
                 <div class="product-info">
-                    <h3>Product B</h3>
-                    <p>Precision-crafted driver designed for consistent performance and exceptional feel on every shot.</p>
+                    <h3 data-en="Product B" data-id="Produk B">Produk B</h3>
+                    <p data-en="Precision-crafted driver designed for consistent performance and exceptional feel on every shot." 
+                       data-id="Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.">
+                        Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.
+                    </p>
                     <div class="product-price">Rp 2.150.000</div>
-                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;">Inquire</a>
+                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a>
                 </div>
             </div>
         </div>
@@ -713,8 +860,11 @@
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="section-title">
-            <h2>Why Choose Fieldit</h2>
-            <p>Discover what sets our golf equipment apart</p>
+            <h2 data-en="Why Choose Fieldit" data-id="Mengapa Memilih Fieldit">Mengapa Memilih Fieldit</h2>
+            <p data-en="Discover what sets our golf equipment apart" 
+               data-id="Temukan apa yang membedakan peralatan golf kami">
+                Temukan apa yang membedakan peralatan golf kami
+            </p>
         </div>
         <div class="features-grid">
             <div class="feature-item">
@@ -722,29 +872,41 @@
                     <!-- Icon placeholder -->
                     <span style="color: var(--fieldit-navy); font-size: 30px;">⚡</span>
                 </div>
-                <h3>Reasonable Price</h3>
-                <p>Produk berkualitas tinggi dengan harga terjangkau untuk semua kalangan pemain golf.</p>
+                <h3 data-en="Reasonable Price" data-id="Harga Terjangkau">Harga Terjangkau</h3>
+                <p data-en="High-quality products at affordable prices for all golf players." 
+                   data-id="Produk berkualitas tinggi dengan harga terjangkau untuk semua kalangan pemain golf.">
+                    Produk berkualitas tinggi dengan harga terjangkau untuk semua kalangan pemain golf.
+                </p>
             </div>
             <div class="feature-item">
                 <div class="feature-icon">
                     <span style="color: var(--fieldit-navy); font-size: 30px;">🎯</span>
                 </div>
-                <h3>Trendy Design</h3>
-                <p>Desain terkini yang stylish dan modern untuk penampilan terbaik di lapangan golf.</p>
+                <h3 data-en="Trendy Design" data-id="Desain Trendi">Desain Trendi</h3>
+                <p data-en="Latest stylish and modern design for the best appearance on the golf course." 
+                   data-id="Desain terkini yang stylish dan modern untuk penampilan terbaik di lapangan golf.">
+                    Desain terkini yang stylish dan modern untuk penampilan terbaik di lapangan golf.
+                </p>
             </div>
             <div class="feature-item">
                 <div class="feature-icon">
                     <span style="color: var(--fieldit-navy); font-size: 30px;">⭐</span>
                 </div>
-                <h3>Premium Quality</h3>
-                <p>Material terbaik dan teknologi mutakhir untuk performa optimal saat bermain golf.</p>
+                <h3 data-en="Premium Quality" data-id="Kualitas Premium">Kualitas Premium</h3>
+                <p data-en="Best materials and cutting-edge technology for optimal performance when playing golf." 
+                   data-id="Material terbaik dan teknologi mutakhir untuk performa optimal saat bermain golf.">
+                    Material terbaik dan teknologi mutakhir untuk performa optimal saat bermain golf.
+                </p>
             </div>
             <div class="feature-item">
                 <div class="feature-icon">
                     <span style="color: var(--fieldit-navy); font-size: 30px;">🏆</span>
                 </div>
-                <h3>Easy Access</h3>
-                <p>Membuat golf dapat diakses oleh semua orang dengan produk yang mudah didapatkan.</p>
+                <h3 data-en="Easy Access" data-id="Akses Mudah">Akses Mudah</h3>
+                <p data-en="Making golf accessible to everyone with easily available products." 
+                   data-id="Membuat golf dapat diakses oleh semua orang dengan produk yang mudah didapatkan.">
+                    Membuat golf dapat diakses oleh semua orang dengan produk yang mudah didapatkan.
+                </p>
             </div>
         </div>
     </section>
@@ -752,39 +914,45 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="section-title">
-            <h2>Contact Us</h2>
-            <p>Get in touch with our team for inquiries and product information</p>
+            <h2 data-en="Contact Us" data-id="Hubungi Kami">Hubungi Kami</h2>
+            <p data-en="Get in touch with our team for inquiries and product information" 
+               data-id="Hubungi tim kami untuk pertanyaan dan informasi produk">
+                Hubungi tim kami untuk pertanyaan dan informasi produk
+            </p>
         </div>
         <div class="contact-container">
             <div class="contact-info">
-                <h2>Get In Touch</h2>
-                <p>Have questions about our products or need assistance? Our team is here to help you find the perfect golf equipment for your game.</p>
+                <h2 data-en="Get In Touch" data-id="Hubungi Kami">Hubungi Kami</h2>
+                <p data-en="Have questions about our products or need assistance? Our team is here to help you find the perfect golf equipment for your game." 
+                   data-id="Ada pertanyaan tentang produk kami atau butuh bantuan? Tim kami siap membantu Anda menemukan peralatan golf yang sempurna untuk permainan Anda.">
+                    Ada pertanyaan tentang produk kami atau butuh bantuan? Tim kami siap membantu Anda menemukan peralatan golf yang sempurna untuk permainan Anda.
+                </p>
                 
                 <div class="contact-details">
                     <div class="contact-detail-item">
                         <i>📍</i>
                         <div>
-                            <h4>Address</h4>
+                            <h4 data-en="Address" data-id="Alamat">Alamat</h4>
                             <p>Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p>
                         </div>
                     </div>
                     <div class="contact-detail-item">
                         <i>📞</i>
                         <div>
-                            <h4>Phone</h4>
+                            <h4 data-en="Phone" data-id="Telepon">Telepon</h4>
                             <p>+62-21-1234-5678</p>
                         </div>
                     </div>
                     <div class="contact-detail-item">
                         <i>📧</i>
                         <div>
-                            <h4>Email</h4>
+                            <h4 data-en="Email" data-id="Email">Email</h4>
                             <p>info@fieldit.com</p>
                         </div>
                     </div>
                 </div>
                 
-                <a href="https://wa.me/6281286506505" class="cta-button">Contact via WhatsApp</a>
+                <a href="https://wa.me/6281286506505" class="cta-button" data-en="Contact via WhatsApp" data-id="Hubungi via WhatsApp">Hubungi via WhatsApp</a>
             </div>
             
             <div class="map-container">
@@ -806,21 +974,24 @@
                 <div class="footer-logo">
                     <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo" style="width: 100px; height: 100px;">
                 </div>
-                <p>Fieldit is your reliable golf mate, providing trendy golf equipment at reasonable prices. We believe everyone should have access to quality golf gear regardless of skill level.</p>
+                <p data-en="Fieldit is your reliable golf mate, providing trendy golf equipment at reasonable prices. We believe everyone should have access to quality golf gear regardless of skill level." 
+                   data-id="Fieldit adalah teman golf andal Anda, menyediakan peralatan golf trendi dengan harga terjangkau. Kami percaya setiap orang harus memiliki akses ke perlengkapan golf berkualitas terlepas dari tingkat keahlian.">
+                    Fieldit adalah teman golf andal Anda, menyediakan peralatan golf trendi dengan harga terjangkau. Kami percaya setiap orang harus memiliki akses ke perlengkapan golf berkualitas terlepas dari tingkat keahlian.
+                </p>
                 <p>필드 안에서의 모든 것 - Everything in the field</p>
             </div>
             <div class="footer-links">
-                <h3>Quick Links</h3>
+                <h3 data-en="Quick Links" data-id="Tautan Cepat">Tautan Cepat</h3>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#home" data-en="Home" data-id="Beranda">Beranda</a></li>
+                    <li><a href="#about" data-en="About" data-id="Tentang">Tentang</a></li>
+                    <li><a href="#products" data-en="Products" data-id="Produk">Produk</a></li>
+                    <li><a href="#features" data-en="Features" data-id="Fitur">Fitur</a></li>
+                    <li><a href="#contact" data-en="Contact" data-id="Kontak">Kontak</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
-                <h3>Contact Info</h3>
+                <h3 data-en="Contact Info" data-id="Info Kontak">Info Kontak</h3>
                 <p>📍 Laks, Jl. Yos Sudarso No.84 6/11 6, Jakarta</p>
                 <p>📞 +62-21-1234-5678</p>
                 <p>📧 info@fieldit.com</p>
@@ -839,6 +1010,42 @@
     </div>
 
     <script>
+        // Language toggle functionality
+        const languageToggle = document.getElementById('languageToggle');
+        let currentLanguage = 'id'; // Default language is Indonesian
+        
+        // Function to toggle language
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'id' ? 'en' : 'id';
+            updateLanguage();
+        }
+        
+        // Function to update all text based on current language
+        function updateLanguage() {
+            // Update all elements with data attributes for language
+            document.querySelectorAll('[data-id]').forEach(element => {
+                if (element.tagName === 'A' || element.tagName === 'BUTTON') {
+                    element.textContent = element.getAttribute(`data-${currentLanguage}`);
+                } else {
+                    element.textContent = element.getAttribute(`data-${currentLanguage}`);
+                }
+            });
+            
+            // Update language toggle button
+            const toggleText = languageToggle.querySelector('span');
+            toggleText.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
+            
+            // Update page title
+            document.title = currentLanguage === 'id' 
+                ? 'Fieldit | Your Reliable Golf Mate' 
+                : 'Fieldit | Teman Golf Andal Anda';
+        }
+        
+        // Add event listener to language toggle
+        if (languageToggle) {
+            languageToggle.addEventListener('click', toggleLanguage);
+        }
+        
         // Mobile Menu Toggle Functionality
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navMenu = document.getElementById('navMenu');
