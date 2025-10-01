@@ -1010,23 +1010,22 @@
                     
                     <div class="form-group">
                         <label for="phone" data-en="Phone Number" data-id="Nomor Telepon">Nomor Telepon</label>
-                        <input type="tel" id="phone" name="phone">
+                        <input type="tel" id="phone" name="phone" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="subject" data-en="Subject" data-id="Subjek">Subjek</label>
-                        <select id="subject" name="subject" required>
-                            <option value="" data-en="Select a subject" data-id="Pilih subjek">Pilih subjek</option>
-                            <option value="product-inquiry" data-en="Product Inquiry" data-id="Pertanyaan Produk">Pertanyaan Produk</option>
-                            <option value="partnership" data-en="Partnership" data-id="Kemitraan">Kemitraan</option>
-                            <option value="complaint" data-en="Complaint" data-id="Keluhan">Keluhan</option>
-                            <option value="other" data-en="Other" data-id="Lainnya">Lainnya</option>
+                        <label for="product" data-en="Product of Interest" data-id="Produk yang Diminati">Produk yang Diminati</label>
+                        <select id="product" name="product">
+                            <option value="" data-en="Select a product" data-id="Pilih produk">Pilih produk</option>
+                            <option value="Product A" data-en="Product A" data-id="Produk A">Produk A</option>
+                            <option value="Product B" data-en="Product B" data-id="Produk B">Produk B</option>
+                            <option value="Other" data-en="Other" data-id="Lainnya">Lainnya</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
                         <label for="message" data-en="Message" data-id="Pesan">Pesan</label>
-                        <textarea id="message" name="message" required></textarea>
+                        <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
                     </div>
                     
                     <button type="submit" class="submit-button" data-en="Send Message" data-id="Kirim Pesan">Kirim Pesan</button>
@@ -1040,13 +1039,12 @@
         <div class="footer-content">
             <div class="footer-about">
                 <div class="footer-logo">
-                    <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo" style="width: 100px; height: 100px;">
+                    <img src="assets/logo/fieldit-1.png" alt="Fieldit Logo">
                 </div>
-                <p data-en="Fieldit is your reliable golf mate, providing trendy golf equipment at reasonable prices. We believe everyone should have access to quality golf gear regardless of skill level." 
-                   data-id="Fieldit adalah teman golf andal Anda, menyediakan peralatan golf trendi dengan harga terjangkau. Kami percaya setiap orang harus memiliki akses ke perlengkapan golf berkualitas terlepas dari tingkat keahlian.">
-                    Fieldit adalah teman golf andal Anda, menyediakan peralatan golf trendi dengan harga terjangkau. Kami percaya setiap orang harus memiliki akses ke perlengkapan golf berkualitas terlepas dari tingkat keahlian.
+                <p data-en="Fieldit is a brand that develops affordable and accessible golf equipment, not for professionals. We believe that golf should be enjoyed by everyone." 
+                   data-id="Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.">
+                    Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.
                 </p>
-                <p>필드 안에서의 모든 것 - Everything in the field</p>
             </div>
             <div class="footer-links">
                 <h3 data-en="Quick Links" data-id="Tautan Cepat">Tautan Cepat</h3>
@@ -1060,60 +1058,81 @@
             </div>
             <div class="footer-contact">
                 <h3 data-en="Contact Info" data-id="Info Kontak">Info Kontak</h3>
-                <p>📍 Laks, Jl. Yos Sudarso No.84 6/11 6, Jakarta</p>
+                <p>📍 Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p>
                 <p>📞 +62-21-1234-5678</p>
                 <p>📧 info@fieldit.com</p>
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2024 Fieldit. All rights reserved. | Branding Guide 2024 May ver</p>
+            <p>&copy; 2023 Fieldit. <span data-en="All rights reserved." data-id="Seluruh hak cipta.">Seluruh hak cipta.</span></p>
         </div>
     </footer>
 
     <!-- Floating WhatsApp Button -->
     <div class="floating-wa">
         <a href="https://wa.me/6281286506505" class="wa-button" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp">
+            <i class="fab fa-whatsapp" style="color: white; font-size: 30px;"></i>
         </a>
     </div>
 
     <script>
-        // Language toggle functionality
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('show');
+            // Mengubah ikon menu
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('show')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Language Toggle
         const languageToggle = document.getElementById('languageToggle');
         const languageToggleMobile = document.getElementById('languageToggleMobile');
         let currentLanguage = 'id'; // Default language is Indonesian
         
-        // Function to toggle language
         function toggleLanguage() {
+            // Toggle language
             currentLanguage = currentLanguage === 'id' ? 'en' : 'id';
-            updateLanguage();
-        }
-        
-        // Function to update all text based on current language
-        function updateLanguage() {
-            // Update all elements with data attributes for language
-            document.querySelectorAll('[data-id]').forEach(element => {
-                if (element.tagName === 'A' || element.tagName === 'BUTTON') {
-                    element.textContent = element.getAttribute(`data-${currentLanguage}`);
-                } else {
-                    element.textContent = element.getAttribute(`data-${currentLanguage}`);
+            
+            // Update toggle button text
+            const toggleButtons = [languageToggle, languageToggleMobile];
+            toggleButtons.forEach(button => {
+                if (button) {
+                    const span = button.querySelector('span');
+                    span.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
                 }
             });
             
-            // Update both language toggle buttons
-            const toggleText = languageToggle ? languageToggle.querySelector('span') : null;
-            const toggleTextMobile = languageToggleMobile ? languageToggleMobile.querySelector('span') : null;
+            // Update all elements with data-id and data-en attributes
+            const translatableElements = document.querySelectorAll('[data-id], [data-en]');
+            translatableElements.forEach(element => {
+                if (currentLanguage === 'id') {
+                    if (element.hasAttribute('data-id')) {
+                        element.textContent = element.getAttribute('data-id');
+                    }
+                } else {
+                    if (element.hasAttribute('data-en')) {
+                        element.textContent = element.getAttribute('data-en');
+                    }
+                }
+            });
             
-            if (toggleText) toggleText.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
-            if (toggleTextMobile) toggleTextMobile.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
-            
-            // Update page title
-            document.title = currentLanguage === 'id' 
-                ? 'Fieldit | Your Reliable Golf Mate' 
-                : 'Fieldit | Teman Golf Andal Anda';
+            // Update placeholder for textarea
+            const messageTextarea = document.getElementById('message');
+            if (messageTextarea) {
+                messageTextarea.placeholder = currentLanguage === 'id' ? 'Tulis pesan Anda di sini...' : 'Write your message here...';
+            }
         }
         
-        // Add event listeners to both language toggles
+        // Add event listeners to both language toggle buttons
         if (languageToggle) {
             languageToggle.addEventListener('click', toggleLanguage);
         }
@@ -1122,85 +1141,80 @@
             languageToggleMobile.addEventListener('click', toggleLanguage);
         }
         
-        // Mobile Menu Toggle Functionality
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const navMenu = document.getElementById('navMenu');
-        
-        // Hanya tambahkan event listener jika tombol toggle ada (di mobile)
-        if (mobileMenuToggle) {
-            mobileMenuToggle.addEventListener('click', function() {
-                navMenu.classList.toggle('show');
-                
-                // Change icon based on menu state
-                const icon = mobileMenuToggle.querySelector('i');
-                if (navMenu.classList.contains('show')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('show');
+                    mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+                    mobileMenuToggle.querySelector('i').classList.add('fa-bars');
                 }
             });
-            
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', function() {
-                    navMenu.classList.remove('show');
-                    const icon = mobileMenuToggle.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                });
-            });
-        }
+        });
         
-        // Smooth scrolling untuk navigasi
-        document.querySelectorAll('nav a').forEach(anchor => {
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+                if (targetId === '#') return;
                 
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Account for fixed header
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
         
-        // Sticky header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-            } else {
-                header.style.backgroundColor = 'var(--white)';
-                header.style.backdropFilter = 'none';
-            }
-        });
-        
-        // Form submission handling
+        // Contact Form Handler
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const product = document.getElementById('product').value;
+            const message = document.getElementById('message').value;
             
-            // Here you would typically send the data to a server
-            // For now, we'll just show an alert
-            alert(currentLanguage === 'id' 
-                ? 'Terima kasih! Pesan Anda telah berhasil dikirim.' 
-                : 'Thank you! Your message has been sent successfully.');
+            // Format message for WhatsApp
+            const whatsappMessage = 
+                `Halo Fieldit, saya tertarik dengan produk Anda.%0A%0A` +
+                `*Nama:* ${name}%0A` +
+                `*Email:* ${email}%0A` +
+                `*Telepon:* ${phone}%0A` +
+                `*Produk yang Diminati:* ${product}%0A` +
+                `*Pesan:* ${message}`;
+            
+            // WhatsApp number (replace with actual number)
+            const whatsappNumber = '6281286506505';
+            
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappURL, '_blank');
             
             // Reset form
-            document.getElementById('contactForm').reset();
+            this.reset();
+            
+            // Show success message
+            alert('Pesan Anda telah berhasil dikirim! Anda akan diarahkan ke WhatsApp.');
+        });
+        
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
         });
     </script>
 </body>
