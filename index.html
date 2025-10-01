@@ -604,8 +604,7 @@
         }
         
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group textarea {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ddd;
@@ -616,8 +615,7 @@
         }
         
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group textarea:focus {
             outline: none;
             border-color: var(--fieldit-mint);
         }
@@ -659,20 +657,40 @@
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        .footer-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
         }
         
         .footer-logo img {
-            height: 40px;
+            height: 60px;
             margin-bottom: 20px;
+        }
+        
+        .footer-about {
+            max-width: 600px;
         }
         
         .footer-about p {
             color: rgba(255, 255, 255, 0.7);
             margin-bottom: 20px;
             line-height: 1.7;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+            text-align: center;
         }
         
         .footer-links h3, .footer-contact h3 {
@@ -1009,21 +1027,6 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="phone" data-en="Phone Number" data-id="Nomor Telepon">Nomor Telepon</label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="product" data-en="Product of Interest" data-id="Produk yang Diminati">Produk yang Diminati</label>
-                        <select id="product" name="product">
-                            <option value="" data-en="Select a product" data-id="Pilih produk">Pilih produk</option>
-                            <option value="Product A" data-en="Product A" data-id="Produk A">Produk A</option>
-                            <option value="Product B" data-en="Product B" data-id="Produk B">Produk B</option>
-                            <option value="Other" data-en="Other" data-id="Lainnya">Lainnya</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
                         <label for="message" data-en="Message" data-id="Pesan">Pesan</label>
                         <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
                     </div>
@@ -1037,34 +1040,41 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-about">
+            <div class="footer-main">
                 <div class="footer-logo">
                     <img src="assets/logo/fieldit-1.png" alt="Fieldit Logo">
                 </div>
-                <p data-en="Fieldit is a brand that develops affordable and accessible golf equipment, not for professionals. We believe that golf should be enjoyed by everyone." 
-                   data-id="Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.">
-                    Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.
-                </p>
+                <div class="footer-about">
+                    <p data-en="Fieldit is a brand that develops affordable and accessible golf equipment, not for professionals. We believe that golf should be enjoyed by everyone." 
+                       data-id="Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.">
+                        Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.
+                    </p>
+                    <p>필드 안에서의 모든 것 - Everything in the field</p>
+                </div>
             </div>
-            <div class="footer-links">
-                <h3 data-en="Quick Links" data-id="Tautan Cepat">Tautan Cepat</h3>
-                <ul>
-                    <li><a href="#home" data-en="Home" data-id="Beranda">Beranda</a></li>
-                    <li><a href="#about" data-en="About" data-id="Tentang">Tentang</a></li>
-                    <li><a href="#products" data-en="Products" data-id="Produk">Produk</a></li>
-                    <li><a href="#features" data-en="Features" data-id="Fitur">Fitur</a></li>
-                    <li><a href="#contact" data-en="Contact" data-id="Kontak">Kontak</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h3 data-en="Contact Info" data-id="Info Kontak">Info Kontak</h3>
-                <p>📍 Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p>
-                <p>📞 +62-21-1234-5678</p>
-                <p>📧 info@fieldit.com</p>
+            
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <h3 data-en="Quick Links" data-id="Tautan Cepat">Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="#home" data-en="Home" data-id="Beranda">Beranda</a></li>
+                        <li><a href="#about" data-en="About" data-id="Tentang">Tentang</a></li>
+                        <li><a href="#products" data-en="Products" data-id="Produk">Produk</a></li>
+                        <li><a href="#features" data-en="Features" data-id="Fitur">Fitur</a></li>
+                        <li><a href="#contact" data-en="Contact" data-id="Kontak">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 data-en="Contact Info" data-id="Info Kontak">Info Kontak</h3>
+                    <p>📍 Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p>
+                    <p>📞 +62-21-1234-5678</p>
+                    <p>📧 info@fieldit.com</p>
+                </div>
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2023 Fieldit. <span data-en="All rights reserved." data-id="Seluruh hak cipta.">Seluruh hak cipta.</span></p>
+            <p>&copy; 2024 Fieldit. All rights reserved. | Branding Guide 2024 May ver</p>
         </div>
     </footer>
 
@@ -1178,8 +1188,6 @@
             // Get form values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const product = document.getElementById('product').value;
             const message = document.getElementById('message').value;
             
             // Format message for WhatsApp
@@ -1187,8 +1195,6 @@
                 `Halo Fieldit, saya tertarik dengan produk Anda.%0A%0A` +
                 `*Nama:* ${name}%0A` +
                 `*Email:* ${email}%0A` +
-                `*Telepon:* ${phone}%0A` +
-                `*Produk yang Diminati:* ${product}%0A` +
                 `*Pesan:* ${message}`;
             
             // WhatsApp number (replace with actual number)
