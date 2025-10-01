@@ -34,6 +34,7 @@
             color: var(--dark-gray);
             line-height: 1.6;
             background-color: var(--white);
+            padding-top: 80px; /* Memberikan ruang untuk header yang fixed */
         }
         
         /* Header */
@@ -124,48 +125,54 @@
 
         /* Mobile Styles */
         @media (max-width: 768px) {
-            header {
-                padding: 15px 5%;
-                position: relative;
+            body {
+                padding-top: 70px; /* Mengurangi padding untuk mobile */
             }
             
+            header {
+                padding: 12px 5%;
+                position: fixed; /* Tetap fixed di mobile */
+                height: 70px; /* Tinggi tetap untuk header mobile */
+            }
             
-            /* Tombol bahasa untuk mobile - muncul di samping toggle */
-        .language-toggle-mobile {
-            display: block;
-            position: absolute;
-            right: 70px; /* Posisi di sebelah kiri toggle */
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: 1px solid var(--fieldit-navy);
-            color: var(--fieldit-navy);
-            padding: 8px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: 'Milocha', cursive;
-            font-size: 12px;
-            z-index: 1001;
-            transition: all 0.3s;
-        }
-        
-        .language-toggle-mobile:hover {
-            background-color: var(--fieldit-navy);
-            color: var(--white);
-        }
-        
-        /* Mobile Menu Toggle - digeser ke kanan */
-        .mobile-menu-toggle {
-            display: block;
-            right: 30px; /* Kembali ke posisi semula */
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        /* Sembunyikan tombol bahasa di menu navigasi untuk mobile */
-        nav ul li .language-toggle {
-            display: none;
-        }
+            .logo img {
+                height: 40px; /* Sedikit lebih kecil di mobile */
+            }
+            
+            /* Tombol bahasa untuk mobile - muncul di sebelah kiri toggle */
+            .language-toggle-mobile {
+                display: block;
+                position: absolute;
+                right: 70px; /* Posisi di sebelah kiri toggle */
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: 1px solid var(--fieldit-navy);
+                color: var(--fieldit-navy);
+                padding: 8px 12px;
+                border-radius: 20px;
+                cursor: pointer;
+                font-family: 'Milocha', cursive;
+                font-size: 12px;
+                z-index: 1001;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+            
+            .language-toggle-mobile:hover {
+                background-color: var(--fieldit-navy);
+                color: var(--white);
+            }
+            
+            /* Mobile Menu Toggle - digeser ke kanan */
+            .mobile-menu-toggle {
+                display: block;
+                right: 30px; /* Kembali ke posisi semula */
+                top: 50%;
+                transform: translateY(-50%);
+            }
             
             /* Sembunyikan tombol bahasa di menu navigasi untuk mobile */
             nav ul li .language-toggle {
@@ -174,8 +181,8 @@
             
             nav ul {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed; /* Menu navigasi mobile juga fixed */
+                top: 70px; /* Mulai tepat di bawah header */
                 left: 0;
                 width: 100%;
                 background: var(--white);
@@ -183,6 +190,8 @@
                 padding: 20px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
                 z-index: 1000;
+                max-height: calc(100vh - 70px); /* Tinggi maksimum untuk scroll jika perlu */
+                overflow-y: auto; /* Scroll jika konten terlalu panjang */
             }
             
             nav ul.show {
@@ -200,7 +209,44 @@
                 display: block;
             }
             
-            /* ... kode responsive lainnya tetap sama ... */
+            .hero {
+                padding: 120px 5% 80px; /* Mengurangi padding atas untuk mobile */
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 80px 5%;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Desktop Styles - sembunyikan tombol bahasa mobile */
@@ -227,7 +273,7 @@
         .hero {
             background: linear-gradient(135deg, var(--fieldit-navy) 0%, #1a3a6b 100%);
             color: var(--white);
-            padding: 180px 5% 120px;
+            padding: 150px 5% 120px; /* Mengurangi padding atas karena header fixed */
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -320,10 +366,15 @@
         .about-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 60px;
             align-items: center;
+        }
+        
+        .about-text {
+            width: 100%;
+            text-align: center;
         }
         
         .about-text h3 {
@@ -337,10 +388,16 @@
         .about-text p {
             margin-bottom: 20px;
             color: var(--dark-gray);
+            text-align: left;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .about-image {
             text-align: center;
+            width: 100%;
+            max-width: 600px;
         }
         
         .about-image img {
@@ -526,17 +583,70 @@
             color: var(--fieldit-navy);
         }
         
-        .map-container {
-            height: 400px;
+        /* Contact Form Styles */
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
             border-radius: 10px;
-            overflow: hidden;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
         
-        #map {
-            height: 100%;
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--fieldit-navy);
+            font-family: 'Milocha', cursive;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
             width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--fieldit-mint);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-button {
+            background-color: var(--fieldit-mint);
+            color: var(--fieldit-navy);
             border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-family: 'Milocha', cursive;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        .submit-button:hover {
+            background-color: #2ad68a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         /* Footer */
@@ -639,97 +749,13 @@
             height: 30px;
         }
         
-        /* ==================== */
-        /* RESPONSIVE STYLES */
-        /* ==================== */
-        
-        /* Desktop - Navbar normal, toggle HIDDEN */
-        @media (min-width: 769px) {
-            .mobile-menu-toggle {
-                display: none !important;
-            }
-            
-            nav ul {
-                display: flex !important;
-            }
-        }
-        
-        /* Mobile Styles */
         @media (max-width: 768px) {
-            header {
-                padding: 15px 5%;
-            }
-            
-            /* Mobile Navigation Styles */
-            .mobile-menu-toggle {
-                display: block;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-                z-index: 1000;
-            }
-            
-            nav ul.show {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
-                text-align: center;
-            }
-            
-            nav ul li a {
-                font-size: 16px;
-                padding: 10px 0;
-                display: block;
-            }
-            
-            .hero {
-                padding: 150px 5% 80px;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            section {
-                padding: 80px 5%;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
             .contact-container {
                 grid-template-columns: 1fr;
-                gap: 40px;
             }
             
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
+            .contact-form {
+                padding: 30px 20px;
             }
         }
 
@@ -749,7 +775,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <!-- Header -->
     <header>
         <div class="logo">
@@ -969,14 +994,43 @@
                 <a href="https://wa.me/6281286506505" class="cta-button" data-en="Contact via WhatsApp" data-id="Hubungi via WhatsApp">Hubungi via WhatsApp</a>
             </div>
             
-            <div class="map-container">
-                <iframe 
-                    id="map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.037215706049!2d106.87124277499668!3d-6.125923993879297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1f8a2f2f2f2f%3A0x2f2f2f2f2f2f2f2f!2sLaks%2C%20Jl.%20Yos%20Sudarso%20No.84%206%2F11%206%2C%20RT.6%2FRW.11%2C%20Sunter%20Jaya%2C%20Kec.%20Tj.%20Priok%2C%20Kota%20Jkt%20Utara%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2014360!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+            <!-- Form Kontak menggantikan peta -->
+            <div class="contact-form">
+                <h3 data-en="Send Us a Message" data-id="Kirim Pesan kepada Kami">Kirim Pesan kepada Kami</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name" data-en="Full Name" data-id="Nama Lengkap">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" data-en="Email Address" data-id="Alamat Email">Alamat Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" data-en="Phone Number" data-id="Nomor Telepon">Nomor Telepon</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject" data-en="Subject" data-id="Subjek">Subjek</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" data-en="Select a subject" data-id="Pilih subjek">Pilih subjek</option>
+                            <option value="product-inquiry" data-en="Product Inquiry" data-id="Pertanyaan Produk">Pertanyaan Produk</option>
+                            <option value="partnership" data-en="Partnership" data-id="Kemitraan">Kemitraan</option>
+                            <option value="complaint" data-en="Complaint" data-id="Keluhan">Keluhan</option>
+                            <option value="other" data-en="Other" data-id="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" data-en="Message" data-id="Pesan">Pesan</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button" data-en="Send Message" data-id="Kirim Pesan">Kirim Pesan</button>
+                </form>
             </div>
         </div>
     </section>
@@ -1026,6 +1080,7 @@
     <script>
         // Language toggle functionality
         const languageToggle = document.getElementById('languageToggle');
+        const languageToggleMobile = document.getElementById('languageToggleMobile');
         let currentLanguage = 'id'; // Default language is Indonesian
         
         // Function to toggle language
@@ -1045,9 +1100,12 @@
                 }
             });
             
-            // Update language toggle button
-            const toggleText = languageToggle.querySelector('span');
-            toggleText.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
+            // Update both language toggle buttons
+            const toggleText = languageToggle ? languageToggle.querySelector('span') : null;
+            const toggleTextMobile = languageToggleMobile ? languageToggleMobile.querySelector('span') : null;
+            
+            if (toggleText) toggleText.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
+            if (toggleTextMobile) toggleTextMobile.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
             
             // Update page title
             document.title = currentLanguage === 'id' 
@@ -1055,9 +1113,13 @@
                 : 'Fieldit | Teman Golf Andal Anda';
         }
         
-        // Add event listener to language toggle
+        // Add event listeners to both language toggles
         if (languageToggle) {
             languageToggle.addEventListener('click', toggleLanguage);
+        }
+        
+        if (languageToggleMobile) {
+            languageToggleMobile.addEventListener('click', toggleLanguage);
         }
         
         // Mobile Menu Toggle Functionality
@@ -1116,6 +1178,29 @@
                 header.style.backgroundColor = 'var(--white)';
                 header.style.backdropFilter = 'none';
             }
+        });
+        
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Here you would typically send the data to a server
+            // For now, we'll just show an alert
+            alert(currentLanguage === 'id' 
+                ? 'Terima kasih! Pesan Anda telah berhasil dikirim.' 
+                : 'Thank you! Your message has been sent successfully.');
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
         });
     </script>
 </body>
