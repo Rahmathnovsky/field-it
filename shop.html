@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fieldit | Your Reliable Golf Mate</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Milocha&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Load Milocha Font -->
+    <link href="https://fonts.cdnfonts.com/css/milocha" rel="stylesheet">
+    
+    <style>
+        /* Variabel warna - disesuaikan dengan panduan Fieldit */
+        :root {
+            --fieldit-navy: #082147;
+            --fieldit-mint: #40E89B;
+            --white: #ffffff;
+            --cream: #f8f5f0;
+            --gray: #6b7280;
+            --dark-gray: #374151;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-gray);
+            line-height: 1.6;
+            background-color: var(--white);
+            padding-top: 80px; /* Memberikan ruang untuk header yang fixed */
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--fieldit-navy);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            font-family: 'Milocha', cursive; /* Font Milocha untuk navigasi */
+        }
+        
+        nav ul li a:hover {
+            color: var(--fieldit-mint);
+        }
+        
+        /* Language Toggle Button */
+        .language-toggle {
+            background: none;
+            border: 1px solid var(--fieldit-navy);
+            color: var(--fieldit-navy);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Milocha', cursive;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .language-toggle:hover {
+            background-color: var(--fieldit-navy);
+            color: var(--white);
+        }
+
+        /* Mobile Menu Toggle - HIDDEN di Desktop */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--fieldit-navy);
+            cursor: pointer;
+            z-index: 1001;
+            font-family: 'Milocha', cursive;
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px; /* Mengurangi padding untuk mobile */
+            }
+            
+            header {
+                padding: 12px 5%;
+                position: fixed; /* Tetap fixed di mobile */
+                height: 70px; /* Tinggi tetap untuk header mobile */
+            }
+            
+            .logo img {
+                height: 40px; /* Sedikit lebih kecil di mobile */
+            }
+            
+            /* Tombol bahasa untuk mobile - muncul di sebelah kiri toggle */
+            .language-toggle-mobile {
+                display: block;
+                position: absolute;
+                right: 70px; /* Posisi di sebelah kiri toggle */
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: 1px solid var(--fieldit-navy);
+                color: var(--fieldit-navy);
+                padding: 8px 12px;
+                border-radius: 20px;
+                cursor: pointer;
+                font-family: 'Milocha', cursive;
+                font-size: 12px;
+                z-index: 1001;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+            
+            .language-toggle-mobile:hover {
+                background-color: var(--fieldit-navy);
+                color: var(--white);
+            }
+            
+            /* Mobile Menu Toggle - digeser ke kanan */
+            .mobile-menu-toggle {
+                display: block;
+                right: 30px; /* Kembali ke posisi semula */
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            /* Sembunyikan tombol bahasa di menu navigasi untuk mobile */
+            nav ul li .language-toggle {
+                display: none;
+            }
+            
+            nav ul {
+                display: none;
+                position: fixed; /* Menu navigasi mobile juga fixed */
+                top: 70px; /* Mulai tepat di bawah header */
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                max-height: calc(100vh - 70px); /* Tinggi maksimum untuk scroll jika perlu */
+                overflow-y: auto; /* Scroll jika konten terlalu panjang */
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                font-size: 16px;
+                padding: 10px 0;
+                display: block;
+            }
+            
+            .hero {
+                padding: 120px 5% 80px; /* Mengurangi padding atas untuk mobile */
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 80px 5%;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Desktop Styles - sembunyikan tombol bahasa mobile */
+        @media (min-width: 769px) {
+            .language-toggle-mobile {
+                display: none !important;
+            }
+            
+            .mobile-menu-toggle {
+                display: none !important;
+            }
+            
+            nav ul {
+                display: flex !important;
+            }
+            
+            /* Tampilkan tombol bahasa di menu navigasi untuk desktop */
+            nav ul li .language-toggle {
+                display: flex;
+            }
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--fieldit-navy) 0%, #1a3a6b 100%);
+            color: var(--white);
+            padding: 150px 5% 120px; /* Mengurangi padding atas karena header fixed */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/hero/hero-bg.jpg') center/cover no-repeat;
+            opacity: 0.1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Milocha', monospace;
+            font-weight: normal;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--fieldit-mint);
+            color: var(--fieldit-navy);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Milocha', cursive; /* Font Milocha untuk button */
+        }
+        
+        .cta-button:hover {
+            background-color: #2ad68a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Sections */
+        section {
+            padding: 100px 5%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Milocha', cursive;
+            font-size: 2.5rem;
+            color: var(--fieldit-navy);
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--cream);
+        }
+        
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-text {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .about-text h3 {
+            font-family: 'Milocha', cursive;
+            font-size: 1.8rem;
+            color: var(--fieldit-navy);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+            text-align: left;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .about-image {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Products Section */
+        .products {
+            background-color: var(--white);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            height: 250px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 25px;
+        }
+        
+        .product-info h3 {
+            font-family: 'Milocha', cursive;
+            font-size: 1.3rem;
+            color: var(--fieldit-navy);
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        
+        .product-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            color: #0e274c;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-family: 'Milocha', cursive; /* Font Milocha untuk harga */
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: var(--fieldit-navy);
+            color: var(--white);
+        }
+        
+        .features .section-title h2 {
+            color: var(--white);
+        }
+        
+        .features .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--fieldit-mint);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-icon img {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .feature-item h3 {
+            font-family: 'Milocha', cursive;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        
+        .feature-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--cream);
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        
+        .contact-info h2 {
+            font-family: 'Milocha', cursive;
+            font-size: 2rem;
+            color: var(--fieldit-navy);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        .contact-info p {
+            margin-bottom: 30px;
+            color: var(--dark-gray);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-detail-item i {
+            margin-right: 15px;
+            color: var(--fieldit-mint);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+        
+        .contact-detail-item h4 {
+            font-family: 'Milocha', cursive; /* Font Milocha untuk sub-judul kontak */
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--fieldit-navy);
+        }
+        
+        /* Contact Form Styles */
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--fieldit-navy);
+            font-family: 'Milocha', cursive;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--fieldit-mint);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-button {
+            background-color: var(--fieldit-mint);
+            color: var(--fieldit-navy);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-family: 'Milocha', cursive;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        .submit-button:hover {
+            background-color: #2ad68a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--fieldit-navy);
+            color: var(--white);
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        .footer-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+        }
+        
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-about {
+            max-width: 600px;
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            font-family: 'Milocha', cursive;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-family: 'Milocha', cursive; /* Font Milocha untuk link footer */
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--fieldit-mint);
+        }
+        
+        .footer-contact p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            font-family: 'Milocha', cursive; /* Font Milocha untuk kontak footer */
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            font-family: 'Milocha', cursive; /* Font Milocha untuk copyright */
+        }
+        
+        /* Floating WhatsApp Button */
+        .floating-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .wa-button {
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .wa-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .wa-button img {
+            width: 30px;
+            height: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <!-- Logo Fieldit -->
+            <img src="assets/logo/fieldit-1.png" alt="Fieldit Logo">
+        </div>
+        
+        <!-- Tombol Bahasa Mobile - Hanya muncul di mobile -->
+        <button class="language-toggle-mobile" id="languageToggleMobile">
+            <i class="fas fa-globe"></i>
+            <span>ID</span>
+        </button>
+        
+        <!-- Mobile Menu Toggle - Hanya muncul di mobile -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav>
+            <ul id="navMenu">
+                <!-- <li><a href="#home" data-en="Home" data-id="Beranda">Beranda</a></li>
+                <li><a href="#about" data-en="About" data-id="Tentang">Tentang</a></li>
+                <li><a href="#products" data-en="Products" data-id="Produk">Produk</a></li>
+                <li><a href="#features" data-en="Features" data-id="Fitur">Fitur</a></li>
+                <li><a href="#contact" data-en="Contact" data-id="Kontak">Kontak</a></li> -->
+                    <!-- Tombol Bahasa Desktop - Hanya muncul di desktop -->
+                    <button class="language-toggle" id="languageToggle">
+                        <i class="fas fa-globe"></i>
+                        <span>ID</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="section-title">
+            <h2 data-en="Choose Your Marketplace" data-id="Pilih Marketplace Kamu">Pilih Marketplace Kamu</h2>
+            <p data-en="Explore our range of premium golf equipment" 
+               data-id="Jelajahi rangkaian peralatan golf premium kami">
+                Jelajahi rangkaian peralatan golf premium kami
+            </p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/tokopedia-3.png" alt="Product A">
+                </div>
+                <div class="product-info">
+                    <h3 data-en="Product A" data-id="Produk A" style="color: #40e89b;">Tokopedia</h3>
+                    <p data-en="Maximize your distance with our advanced golf ball technology featuring optimized aerodynamics." 
+                       data-id="Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.">
+                        Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.
+                    </p>
+                    <div class="product-price">Rp 275.000</div>
+                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/shopee-3.png" alt="Product B">
+                </div>
+                <div class="product-info">
+                    <h3 data-en="Product B" data-id="Produk B" style="color: #40e89b;">Shopee</h3>
+                    <p data-en="Precision-crafted driver designed for consistent performance and exceptional feel on every shot." 
+                       data-id="Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.">
+                        Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.
+                    </p>
+                    <div class="product-price">Rp 2.150.000</div>
+                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-main">
+                <!-- <div class="footer-logo">
+                    <img src="assets/logo/fieldit-3.png" alt="" style="width: 200px; height: 200px;">
+                </div> -->
+                <div class="footer-about">
+                    <img src="assets/logo/fieldit-3.png" alt="" style="width: 150px; height: 150px;">
+                    <p data-en="Fieldit is a brand that develops affordable and accessible golf equipment, not for professionals. We believe that golf should be enjoyed by everyone." 
+                       data-id="Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.">
+                        Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.
+                    </p>
+                    <p><a style="color: #4be398;">필드 안에서의 모든 것</a> - Everything in the field</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <!-- <div class="footer-links">
+                    <h3 data-en="Quick Links" data-id="Tautan Cepat" style="color: #4be398;">Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="#home" data-en="Home" data-id="Beranda">Beranda</a></li>
+                        <li><a href="#about" data-en="About" data-id="Tentang">Tentang</a></li>
+                        <li><a href="#products" data-en="Products" data-id="Produk">Produk</a></li>
+                        <li><a href="#features" data-en="Features" data-id="Fitur">Fitur</a></li>
+                        <li><a href="#contact" data-en="Contact" data-id="Kontak">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 data-en="Contact Info" data-id="Info Kontak" style="color: #4be398;">Info Kontak</h3>
+                    <p>📍 Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p>
+                    <p>📞 +62-21-1234-5678</p>
+                    <p>📧 info@fieldit.com</p>
+                </div> -->
+            </div>
+        </div>
+        <div class="copyright">
+            <p style="color: #4be398;">&copy; 2024 Fieldit. All rights reserved. | Branding Guide 2024 May ver</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <!-- <div class="floating-wa">
+        <a href="https://wa.me/6281286506505" class="wa-button" target="_blank">
+            <i class="fab fa-whatsapp" style="color: white; font-size: 30px;"></i>
+        </a>
+    </div> -->
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('show');
+            // Mengubah ikon menu
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('show')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Language Toggle
+        const languageToggle = document.getElementById('languageToggle');
+        const languageToggleMobile = document.getElementById('languageToggleMobile');
+        let currentLanguage = 'id'; // Default language is Indonesian
+        
+        function toggleLanguage() {
+            // Toggle language
+            currentLanguage = currentLanguage === 'id' ? 'en' : 'id';
+            
+            // Update toggle button text
+            const toggleButtons = [languageToggle, languageToggleMobile];
+            toggleButtons.forEach(button => {
+                if (button) {
+                    const span = button.querySelector('span');
+                    span.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
+                }
+            });
+            
+            // Update all elements with data-id and data-en attributes
+            const translatableElements = document.querySelectorAll('[data-id], [data-en]');
+            translatableElements.forEach(element => {
+                if (currentLanguage === 'id') {
+                    if (element.hasAttribute('data-id')) {
+                        element.textContent = element.getAttribute('data-id');
+                    }
+                } else {
+                    if (element.hasAttribute('data-en')) {
+                        element.textContent = element.getAttribute('data-en');
+                    }
+                }
+            });
+            
+            // Update placeholder for textarea
+            const messageTextarea = document.getElementById('message');
+            if (messageTextarea) {
+                messageTextarea.placeholder = currentLanguage === 'id' ? 'Tulis pesan Anda di sini...' : 'Write your message here...';
+            }
+        }
+        
+        // Add event listeners to both language toggle buttons
+        if (languageToggle) {
+            languageToggle.addEventListener('click', toggleLanguage);
+        }
+        
+        if (languageToggleMobile) {
+            languageToggleMobile.addEventListener('click', toggleLanguage);
+        }
+        
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('show');
+                    mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+                    mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+                }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Account for fixed header
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Contact Form Handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Format message for WhatsApp
+            const whatsappMessage = 
+                `Halo Fieldit, saya tertarik dengan produk Anda.%0A%0A` +
+                `*Nama:* ${name}%0A` +
+                `*Email:* ${email}%0A` +
+                `*Pesan:* ${message}`;
+            
+            // WhatsApp number (replace with actual number)
+            const whatsappNumber = '6281286506505';
+            
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappURL, '_blank');
+            
+            // Reset form
+            this.reset();
+            
+            // Show success message
+            alert('Pesan Anda telah berhasil dikirim! Anda akan diarahkan ke WhatsApp.');
+        });
+        
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
