@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/logo/fieldit-3.png">
     <title>Fieldit | Your Reliable Golf Mate</title>
     
     <!-- Google Fonts -->
@@ -270,15 +271,22 @@
         }
         
         /* Hero Section */
+        /* Hero Section - Perbaikan */
         .hero {
-            background: linear-gradient(135deg, var(--fieldit-navy) 0%, #1a3a6b 100%);
+            background: 
+                linear-gradient(135deg, rgba(8, 33, 71, 0.85) 0%, rgba(26, 58, 107, 0.85) 100%),
+                url('assets/hero-2.png');
+            background-size: cover;
+            background-position: center;
             color: var(--white);
-            padding: 150px 5% 120px; /* Mengurangi padding atas karena header fixed */
+            padding: 150px 5% 120px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
-        
+
+        /* Alternatif: Jika Anda ingin menggunakan gambar hero-1.png */
+        /* Ganti URL dengan path yang sesuai ke gambar hero-1.png Anda */
         .hero::before {
             content: '';
             position: absolute;
@@ -286,10 +294,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('assets/hero/hero-bg.jpg') center/cover no-repeat;
-            opacity: 0.1;
+            background: 
+                linear-gradient(135deg, rgba(8, 33, 71, 0.8) 0%, rgba(26, 58, 107, 0.8) 100%),
+                url('assets/hero-2.png') center/cover no-repeat;
+            opacity: 1;
+            z-index: 1;
         }
-        
+
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
@@ -797,7 +808,9 @@
     <header>
         <div class="logo">
             <!-- Logo Fieldit -->
+            <a href="index.html">
             <img src="assets/logo/fieldit-1.png" alt="Fieldit Logo">
+            </a>
         </div>
         
         <!-- Tombol Bahasa Mobile - Hanya muncul di mobile -->
@@ -883,6 +896,10 @@
                data-id="Jelajahi rangkaian peralatan golf premium kami">
                 Jelajahi rangkaian peralatan golf premium kami
             </p>
+            <br>
+            <div>
+                <a href="shop.html" class="cta-button" data-en="View Our Products" data-id="Lihat Produk Kami">Lihat Produk Kami</a>
+            </div>
         </div>
         <div class="product-grid">
             <div class="product-card">
@@ -895,8 +912,8 @@
                        data-id="Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.">
                         Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.
                     </p>
-                    <div class="product-price">Rp 275.000</div>
-                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a>
+                    <!-- <div class="product-price">Rp 275.000</div>
+                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a> -->
                 </div>
             </div>
             <div class="product-card">
@@ -909,8 +926,8 @@
                        data-id="Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.">
                         Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.
                     </p>
-                    <div class="product-price">Rp 2.150.000</div>
-                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a>
+                    <!-- <div class="product-price">Rp 2.150.000</div>
+                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a> -->
                 </div>
             </div>
         </div>
@@ -990,10 +1007,17 @@
                 
                 <div class="contact-details">
                     <div class="contact-detail-item">
-                        <i>📍</i>
+                        <i>⛳</i>
                         <div>
-                            <h4 data-en="Address" data-id="Alamat">Alamat</h4>
-                            <p>Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p>
+                            <h4 data-en="Indonesia" data-id="Indonesia">Indonesia</h4>
+                            <p>Soho Podomoro City Unit 2310, Jakarta Barat 11470.</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <i>⛳</i>
+                        <div>
+                            <h4 data-en="Australia" data-id="Australia">Australia</h4>
+                            <p>4/47 Cook Court North Lakes, Queensland 4509.</p>
                         </div>
                     </div>
                     <div class="contact-detail-item">
@@ -1071,7 +1095,7 @@
                 
                 <div class="footer-contact">
                     <h3 data-en="Contact Info" data-id="Info Kontak" style="color: #4be398;">Info Kontak</h3>
-                    <p>📍 Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p>
+                    <!-- <p>📍 Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p> -->
                     <p>📞 +62-21-1234-5678</p>
                     <p>📧 info@fieldit.com</p>
                 </div>
