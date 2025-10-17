@@ -270,34 +270,53 @@
             }
         }
         
-        /* Hero Section */
-        /* Hero Section - Perbaikan */
+        /* Hero Section - PERBAIKAN UTAMA */
         .hero {
-            background: 
-                linear-gradient(135deg, rgba(8, 33, 71, 0.85) 0%, rgba(26, 58, 107, 0.85) 100%),
-                url('assets/hero-2.png');
-            background-size: cover;
-            background-position: center;
+            background-color: var(--fieldit-navy); /* Fallback color */
             color: var(--white);
             padding: 150px 5% 120px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Alternatif: Jika Anda ingin menggunakan gambar hero-1.png */
-        /* Ganti URL dengan path yang sesuai ke gambar hero-1.png Anda */
-        .hero::before {
+        /* Container untuk background image */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-bg::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
             background: 
-                linear-gradient(135deg, rgba(8, 33, 71, 0.8) 0%, rgba(26, 58, 107, 0.8) 100%),
-                url('assets/hero-2.png') center/cover no-repeat;
-            opacity: 1;
+                linear-gradient(135deg, rgba(8, 33, 71, 0.85) 0%, rgba(26, 58, 107, 0.85) 100%);
+            z-index: 2;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/hero-3.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             z-index: 1;
         }
 
@@ -786,11 +805,62 @@
             .contact-form {
                 padding: 30px 20px;
             }
+            
+            /* PERBAIKAN HERO SECTION UNTUK MOBILE */
+            .hero {
+                padding: 100px 5% 80px;
+                min-height: 60vh;
+            }
+            
+            .hero-bg::after {
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .hero-bg::before {
+                background: 
+                    linear-gradient(135deg, rgba(8, 33, 71, 0.75) 0%, rgba(26, 58, 107, 0.75) 100%);
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+            
+            .hero-content img {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 15px;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 14px;
+            }
         }
 
         @media (max-width: 480px) {
+            .hero {
+                min-height: 50vh;
+                padding: 80px 5% 60px;
+            }
+            
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .hero-content img {
+                width: 80px;
+                height: 80px;
             }
             
             .section-title h2 {
@@ -842,10 +912,11 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - DIPERBAIKI -->
     <section id="home" class="hero">
+        <div class="hero-bg"></div>
         <div class="hero-content">
-            <img src="assets/logo/fieldit-3.png" alt="" style="width: 130px; height: 130px;">
+            <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo" style="width: 130px; height: 130px;">
             <h1 data-en="Your Reliable Golf Mate" data-id="Your Reliable Golf Mate">Your Reliable Golf Mate</h1>
             <p data-en="Premium golf equipment with trendy design at reasonable prices. Perfect for beginners and enthusiasts alike." 
                data-id="Peralatan golf premium dengan desain trendi dan harga terjangkau. Sempurna untuk pemula dan penggemar golf.">
@@ -858,7 +929,7 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="section-title">
-            <img src="assets/logo/fieldit-3.png" alt="" style="width: 150px; height: 150px;">
+            <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo" style="width: 150px; height: 150px;">
             <h2 data-en="About Fieldit" data-id="Tentang Fieldit">Tentang Fieldit</h2>
             <p data-en="Discover our commitment to excellence in golf equipment manufacturing" 
                data-id="Temukan komitmen kami terhadap keunggulan dalam pembuatan peralatan golf">
@@ -1072,7 +1143,7 @@
                     <img src="assets/logo/fieldit-3.png" alt="" style="width: 200px; height: 200px;">
                 </div> -->
                 <div class="footer-about">
-                    <img src="assets/logo/fieldit-3.png" alt="" style="width: 150px; height: 150px;">
+                    <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo" style="width: 150px; height: 150px;">
                     <p data-en="Fieldit is a brand that develops affordable and accessible golf equipment, not for professionals. We believe that golf should be enjoyed by everyone." 
                        data-id="Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.">
                         Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.
