@@ -562,6 +562,17 @@
             color: rgba(255, 255, 255, 0.8);
             font-size: 0.95rem;
         }
+
+        /* Tambahkan di CSS Anda */
+        .mobile-hidden {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-hidden {
+                display: none;
+            }
+        }
         
         /* Contact Section */
         .contact {
@@ -582,13 +593,11 @@
             color: var(--fieldit-navy);
             margin-bottom: 20px;
             font-weight: 400;
-            text-align: center;
         }
         
         .contact-info p {
             margin-bottom: 30px;
             color: var(--dark-gray);
-            text-align: center;
         }
         
         .contact-details {
@@ -1072,11 +1081,12 @@
         </div>
         <div class="contact-container">
             <div class="contact-info">
-                <h2 data-en="Get In Touch" data-id="Hubungi Kami" style="color: #4de89b;">Pusat Bantuan</h2>
-                <p data-en="Have questions about our products or need assistance? Our team is here to help you find the perfect golf equipment for your game." 
-                   data-id="Ada pertanyaan tentang produk kami atau butuh bantuan? Tim kami siap membantu Anda menemukan peralatan golf yang sempurna untuk permainan Anda.">
+                <h2 data-en="Field It Services" data-id="Layanan Field It" style="color: #4de89b;" class="mobile-hidden">Layanan Field It</h2>
+                <!-- <p data-en="Have questions about our products or need assistance? Our team is here to help you find the perfect golf equipment for your game." 
+                data-id="Ada pertanyaan tentang produk kami atau butuh bantuan? Tim kami siap membantu Anda menemukan peralatan golf yang sempurna untuk permainan Anda."
+                class="mobile-hidden">
                     Ada pertanyaan tentang produk kami atau butuh bantuan? Tim kami siap membantu Anda menemukan peralatan golf yang sempurna untuk permainan Anda.
-                </p>
+                </p> -->
                 
                 <div class="contact-details">
                     <div class="contact-detail-item">
@@ -1109,7 +1119,7 @@
                     </div>
                 </div>
                 
-                <a href="https://wa.me/6281286506505" class="cta-button" data-en="Contact via WhatsApp" data-id="Hubungi via WhatsApp">Hubungi via WhatsApp</a>
+                <center><a href="https://wa.me/6281286506505" class="cta-button" data-en="Contact via WhatsApp" data-id="Hubungi via WhatsApp">Hubungi via WhatsApp</a></center>
             </div>
             
             <!-- Form Kontak menggantikan peta -->
