@@ -436,17 +436,23 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         
-        /* Products Section */
+        /* Products Section - CAROUSEL STYLES */
         .products {
             background-color: var(--white);
+            position: relative;
+            overflow: hidden;
         }
         
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+        .product-carousel {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
         }
         
         .product-card {
@@ -455,6 +461,8 @@
             overflow: hidden;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 0 0 100%;
+            margin: 0 10px;
         }
         
         .product-card:hover {
@@ -506,6 +514,27 @@
             font-weight: 600;
             margin-bottom: 15px;
             font-family: 'Milocha', cursive; /* Font Milocha untuk harga */
+        }
+        
+        /* Carousel Navigation */
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .carousel-dot.active {
+            background-color: var(--fieldit-mint);
         }
         
         /* Features Section */
@@ -853,6 +882,11 @@
                 padding: 12px 30px;
                 font-size: 14px;
             }
+            
+            /* Carousel adjustments for mobile */
+            .product-card {
+                margin: 0 5px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -970,7 +1004,7 @@
         </div>
     </section>
 
-    <!-- Products Section -->
+    <!-- Products Section - CAROUSEL -->
     <section id="products" class="products">
         <div class="section-title">
             <h2 data-en="Our Products" data-id="Produk Kami">Produk Kami</h2>
@@ -983,34 +1017,68 @@
                 <a href="shop.html" class="cta-button" data-en="View Our Products" data-id="Lihat Produk Kami">Lihat Produk Kami</a>
             </div>
         </div>
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/pack-1.png" alt="Product A">
+        
+        <!-- Carousel Container -->
+        <div class="product-carousel">
+            <div class="product-track" id="productTrack">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/pack-1.png" alt="Product A">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-en="Product A" data-id="Produk A" style="color: #40e89b;">Produk A</h3>
+                        <p data-en="Maximize your distance with our advanced golf ball technology featuring optimized aerodynamics." 
+                           data-id="Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.">
+                            Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.
+                        </p>
+                        <!-- <div class="product-price">Rp 275.000</div>
+                        <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a> -->
+                    </div>
                 </div>
-                <div class="product-info">
-                    <h3 data-en="Product A" data-id="Produk A" style="color: #40e89b;">Produk A</h3>
-                    <p data-en="Maximize your distance with our advanced golf ball technology featuring optimized aerodynamics." 
-                       data-id="Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.">
-                        Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.
-                    </p>
-                    <!-- <div class="product-price">Rp 275.000</div>
-                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a> -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/pack-2.png" alt="Product B">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-en="Product B" data-id="Produk B" style="color: #40e89b;">Produk B</h3>
+                        <p data-en="Precision-crafted driver designed for consistent performance and exceptional feel on every shot." 
+                           data-id="Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.">
+                            Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.
+                        </p>
+                        <!-- <div class="product-price">Rp 2.150.000</div>
+                        <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a> -->
+                    </div>
                 </div>
+                <!-- Additional product cards for demonstration -->
+                <!-- <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/pack-1.png" alt="Product C">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-en="Product C" data-id="Produk C" style="color: #40e89b;">Produk C</h3>
+                        <p data-en="Premium golf gloves with enhanced grip and comfort for better control and feel." 
+                           data-id="Sarung tangan golf premium dengan pegangan dan kenyamanan yang ditingkatkan untuk kontrol dan feel yang lebih baik.">
+                            Sarung tangan golf premium dengan pegangan dan kenyamanan yang ditingkatkan untuk kontrol dan feel yang lebih baik.
+                        </p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/pack-2.png" alt="Product D">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-en="Product D" data-id="Produk D" style="color: #40e89b;">Produk D</h3>
+                        <p data-en="High-performance golf shoes with advanced traction technology for stability during swings." 
+                           data-id="Sepatu golf berkinerja tinggi dengan teknologi traksi canggih untuk stabilitas selama ayunan.">
+                            Sepatu golf berkinerja tinggi dengan teknologi traksi canggih untuk stabilitas selama ayunan.
+                        </p>
+                    </div>
+                </div> -->
             </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/pack-2.png" alt="Product B">
-                </div>
-                <div class="product-info">
-                    <h3 data-en="Product B" data-id="Produk B" style="color: #40e89b;">Produk B</h3>
-                    <p data-en="Precision-crafted driver designed for consistent performance and exceptional feel on every shot." 
-                       data-id="Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.">
-                        Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.
-                    </p>
-                    <!-- <div class="product-price">Rp 2.150.000</div>
-                    <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a> -->
-                </div>
+            
+            <!-- Carousel Navigation Dots -->
+            <div class="carousel-nav" id="carouselNav">
+                <!-- Dots will be generated by JavaScript -->
             </div>
         </div>
     </section>
@@ -1160,7 +1228,8 @@
                        data-id="Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.">
                         Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses, bukan untuk para profesional. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.
                     </p>
-                    <p><a style="color: #4be398;">필드 안에서의 모든 것</a> - Everything in the field</p>
+                    <!-- <p><a style="color: #4be398;">필드 안에서의 모든 것</a> - Everything in the field</p> -->
+                     <p><a style="color: #4be398;">Everything in the field</a></p>
                 </div>
             </div>
             
@@ -1179,7 +1248,7 @@
                 <div class="footer-contact">
                     <h3 data-en="Contact Info" data-id="Info Kontak" style="color: #4be398;">Info Kontak</h3>
                     <!-- <p>📍 Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p> -->
-                    <p>📞 +62-21-1234-5678</p>
+                    <p>📞 +62-811-1001-2597</p>
                     <p>📧 info@fieldit.com</p>
                 </div>
             </div>
@@ -1332,6 +1401,71 @@
             } else {
                 header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
             }
+        });
+
+        // CAROUSEL FUNCTIONALITY
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('productTrack');
+            const cards = document.querySelectorAll('.product-card');
+            const nav = document.getElementById('carouselNav');
+            let currentIndex = 0;
+            let autoSlideInterval;
+            
+            // Create navigation dots
+            cards.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('carousel-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    resetAutoSlide();
+                });
+                nav.appendChild(dot);
+            });
+            
+            const dots = document.querySelectorAll('.carousel-dot');
+            
+            // Function to go to specific slide
+            function goToSlide(index) {
+                currentIndex = index;
+                const translateX = -currentIndex * 100;
+                track.style.transform = `translateX(${translateX}%)`;
+                
+                // Update active dot
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+            
+            // Function to go to next slide
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % cards.length;
+                goToSlide(currentIndex);
+            }
+            
+            // Function to start auto sliding
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(nextSlide, 4000); // 4 seconds
+            }
+            
+            // Function to reset auto slide timer
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+            
+            // Start auto sliding
+            startAutoSlide();
+            
+            // Pause auto sliding on hover
+            const carousel = document.querySelector('.product-carousel');
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                startAutoSlide();
+            });
         });
     </script>
 </body>
