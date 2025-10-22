@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/logo/fieldit-3.png">
-    <title>Fieldit | Your Reliable Golf Mate</title>
+    <title>Fieldit | Make Golf More Fun</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Milocha&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -340,8 +340,24 @@
             opacity: 0.9;
             font-weight: 300;
         }
-        
+
         .cta-button {
+            display: inline-block;
+            background-color: #082147;
+            color: var(--fieldit-navy);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Milocha', cursive; /* Font Milocha untuk button */
+        }
+        
+        .cta-button-home {
             display: inline-block;
             background-color: var(--fieldit-mint);
             color: var(--fieldit-navy);
@@ -359,6 +375,12 @@
         
         .cta-button:hover {
             background-color: #2ad68a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button-home:hover {
+            background-color: #082147;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
@@ -696,7 +718,7 @@
         }
         
         .submit-button {
-            background-color: var(--fieldit-mint);
+            background-color: #082147;
             color: var(--fieldit-navy);
             border: none;
             padding: 15px 30px;
@@ -961,13 +983,13 @@
     <section id="home" class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
-            <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo" style="width: 130px; height: 130px;">
-            <h1 data-en="Your Reliable Golf Mate" data-id="Your Reliable Golf Mate">Your Reliable Golf Mate</h1>
+            <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo" style="width: 170px; height: 170px;">
+            <h1 data-en="Make Golf More Fun" data-id="Jadikan Golf Lebih Menyenangkan">Make Golf More Fun</h1>
             <p data-en="Premium golf equipment with trendy design at reasonable prices. Perfect for beginners and enthusiasts alike." 
                data-id="Peralatan golf premium dengan desain trendi dan harga terjangkau. Sempurna untuk pemula dan penggemar golf.">
                 Premium golf equipment with trendy design at reasonable prices. Perfect for beginners and enthusiasts alike.
             </p>
-            <a href="#products" class="cta-button" data-en="Explore Products" data-id="Jelajahi Produk" style="color: #ffffff;">Jelajahi Produk</a>
+            <a href="#products" class="cta-button-home" data-en="Explore Products" data-id="Jelajahi Produk" style="color: #ffffff;">Jelajahi Produk</a>
         </div>
     </section>
 
@@ -999,7 +1021,7 @@
             </div>
             <div class="about-image">
                 <!-- About image placeholder -->
-                <img src="assets/product/merg-golfball.png" alt="Fieldit Golf Ball">
+                <img src="assets/about-fieldit.png" alt="Fieldit Golf Ball">
             </div>
         </div>
     </section>
@@ -1007,14 +1029,14 @@
     <!-- Products Section - CAROUSEL -->
     <section id="products" class="products">
         <div class="section-title">
-            <h2 data-en="Our Products" data-id="Produk Kami">Produk Kami</h2>
+            <h2 data-en="Our Products" data-id="Produk Kami" style="color: #4de89b;">Produk Kami</h2>
             <p data-en="Explore our range of premium golf equipment" 
                data-id="Jelajahi rangkaian peralatan golf premium kami">
                 Jelajahi rangkaian peralatan golf premium kami
             </p>
             <br>
             <div>
-                <a href="shop.html" class="cta-button" data-en="View Our Products" data-id="Lihat Produk Kami">Lihat Produk Kami</a>
+                <a href="shop.html" class="cta-button" data-en="View Our Products" data-id="Lihat Produk Kami" style="color: #ffffff;">Lihat Produk Kami</a>
             </div>
         </div>
         
@@ -1187,7 +1209,7 @@
                     </div>
                 </div>
                 
-                <center><a href="https://wa.me/6281110012597" class="cta-button" data-en="Contact via WhatsApp" data-id="Hubungi via WhatsApp">Hubungi via WhatsApp</a></center>
+                <center><a href="https://wa.me/6281110012597" class="cta-button" data-en="Contact via WhatsApp" data-id="Hubungi via WhatsApp" style="color: #ffffff;">Hubungi via WhatsApp</a></center>
             </div>
             
             <!-- Form Kontak menggantikan peta -->
@@ -1209,7 +1231,7 @@
                         <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
                     </div>
                     
-                    <button type="submit" class="submit-button" data-en="Send Message" data-id="Kirim Pesan">Kirim Pesan</button>
+                    <button type="submit" class="submit-button" data-en="Send Message" data-id="Kirim Pesan" style="color: #ffffff;">Kirim Pesan</button>
                 </form>
             </div>
         </div>
