@@ -58,8 +58,10 @@
         }
         
         .logo img {
-            height: 50px;
+            height: 65px; /* Diperbesar dari 50px */
             width: auto;
+            transform: scale(1.2); /* Alternatif: scaling */
+            transform-origin: left center; /* Scaling dari kiri agar tidak menggeser navigasi */
         }
         
         nav ul {
@@ -137,7 +139,8 @@
             }
             
             .logo img {
-                height: 40px; /* Sedikit lebih kecil di mobile */
+                height: 55px; /* Diperbesar dari 40px untuk mobile */
+                transform: scale(1.15);
             }
             
             /* Tombol bahasa untuk mobile - muncul di sebelah kiri toggle */
