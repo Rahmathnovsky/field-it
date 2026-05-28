@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/logo/fieldit-3.png">
+    <title>Fieldit | Make Golf More Fun</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Milocha&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Load Milocha Font -->
+    <link href="https://fonts.cdnfonts.com/css/milocha" rel="stylesheet">
+
+    <style>
+        /* Variabel warna - disesuaikan dengan panduan Fieldit */
+        :root {
+            --fieldit-navy: #082147;
+            --fieldit-mint: #40E89B;
+            --white: #ffffff;
+            --cream: #f8f5f0;
+            --gray: #6b7280;
+            --dark-gray: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-gray);
+            line-height: 1.6;
+            background-color: var(--white);
+            padding-top: 80px;
+            /* Memberikan ruang untuk header yang fixed */
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 65px;
+            /* Diperbesar dari 50px */
+            width: auto;
+            transform: scale(1.2);
+            /* Alternatif: scaling */
+            transform-origin: left center;
+            /* Scaling dari kiri agar tidak menggeser navigasi */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--fieldit-navy);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            font-family: 'Milocha', cursive;
+            /* Font Milocha untuk navigasi */
+        }
+
+        nav ul li a:hover {
+            color: var(--fieldit-mint);
+        }
+
+        /* Language Toggle Button */
+        .language-toggle {
+            background: none;
+            border: 1px solid var(--fieldit-navy);
+            color: var(--fieldit-navy);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Milocha', cursive;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .language-toggle:hover {
+            background-color: var(--fieldit-navy);
+            color: var(--white);
+        }
+
+        /* Mobile Menu Toggle - HIDDEN di Desktop */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--fieldit-navy);
+            cursor: pointer;
+            z-index: 1001;
+            font-family: 'Milocha', cursive;
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+                /* Mengurangi padding untuk mobile */
+            }
+
+            header {
+                padding: 12px 5%;
+                position: fixed;
+                /* Tetap fixed di mobile */
+                height: 70px;
+                /* Tinggi tetap untuk header mobile */
+            }
+
+            .logo img {
+                height: 55px;
+                /* Diperbesar dari 40px untuk mobile */
+                transform: scale(1.15);
+            }
+
+            /* Tombol bahasa untuk mobile - muncul di sebelah kiri toggle */
+            .language-toggle-mobile {
+                display: block;
+                position: absolute;
+                right: 70px;
+                /* Posisi di sebelah kiri toggle */
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: 1px solid var(--fieldit-navy);
+                color: var(--fieldit-navy);
+                padding: 8px 12px;
+                border-radius: 20px;
+                cursor: pointer;
+                font-family: 'Milocha', cursive;
+                font-size: 12px;
+                z-index: 1001;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .language-toggle-mobile:hover {
+                background-color: var(--fieldit-navy);
+                color: var(--white);
+            }
+
+            /* Mobile Menu Toggle - digeser ke kanan */
+            .mobile-menu-toggle {
+                display: block;
+                right: 30px;
+                /* Kembali ke posisi semula */
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            /* Sembunyikan tombol bahasa di menu navigasi untuk mobile */
+            nav ul li .language-toggle {
+                display: none;
+            }
+
+            nav ul {
+                display: none;
+                position: fixed;
+                /* Menu navigasi mobile juga fixed */
+                top: 70px;
+                /* Mulai tepat di bawah header */
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                max-height: calc(100vh - 70px);
+                /* Tinggi maksimum untuk scroll jika perlu */
+                overflow-y: auto;
+                /* Scroll jika konten terlalu panjang */
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            nav ul li a {
+                font-size: 16px;
+                padding: 10px 0;
+                display: block;
+            }
+
+            .hero {
+                padding: 120px 5% 80px;
+                /* Mengurangi padding atas untuk mobile */
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Desktop Styles - sembunyikan tombol bahasa mobile */
+        @media (min-width: 769px) {
+            .language-toggle-mobile {
+                display: none !important;
+            }
+
+            .mobile-menu-toggle {
+                display: none !important;
+            }
+
+            nav ul {
+                display: flex !important;
+            }
+
+            /* Tampilkan tombol bahasa di menu navigasi untuk desktop */
+            nav ul li .language-toggle {
+                display: flex;
+            }
+        }
+
+        /* Hero Section - PERBAIKAN UTAMA */
+        .hero {
+            background-color: var(--fieldit-navy);
+            /* Fallback color */
+            color: var(--white);
+            padding: 150px 5% 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Container untuk background image */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(135deg, rgba(8, 33, 71, 0.85) 0%, rgba(26, 58, 107, 0.85) 100%);
+            z-index: 2;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/hero-4.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Milocha', monospace;
+            font-weight: normal;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #082147;
+            color: var(--fieldit-navy);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Milocha', cursive;
+            /* Font Milocha untuk button */
+        }
+
+        .cta-button-home {
+            display: inline-block;
+            background-color: var(--fieldit-mint);
+            color: var(--fieldit-navy);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Milocha', cursive;
+            /* Font Milocha untuk button */
+        }
+
+        .cta-button:hover {
+            background-color: #2ad68a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button-home:hover {
+            background-color: #082147;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: 'Milocha', cursive;
+            font-size: 2.5rem;
+            color: var(--fieldit-navy);
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--cream);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text {
+            width: 100%;
+            text-align: center;
+        }
+
+        .about-text h3 {
+            font-family: 'Milocha', cursive;
+            font-size: 1.8rem;
+            color: var(--fieldit-navy);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+            text-align: left;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .about-image {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Products Section - CAROUSEL STYLES */
+        .products {
+            background-color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-carousel {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 0 0 100%;
+            margin: 0 10px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 250px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            font-family: 'Milocha', cursive;
+            font-size: 1.3rem;
+            color: var(--fieldit-navy);
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .product-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            color: #0e274c;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-family: 'Milocha', cursive;
+            /* Font Milocha untuk harga */
+        }
+
+        /* Carousel Navigation */
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-dot.active {
+            background-color: var(--fieldit-mint);
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--fieldit-navy);
+            color: var(--white);
+        }
+
+        .features .section-title h2 {
+            color: var(--white);
+        }
+
+        .features .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--fieldit-mint);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .feature-icon img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .feature-item h3 {
+            font-family: 'Milocha', cursive;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .feature-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        /* Clients Section */
+        .clients {
+            background-color: var(--white);
+            padding: 80px 5% 60px;
+            overflow: hidden;
+        }
+
+        .clients .section-title h2 {
+            color: var(--fieldit-navy);
+            margin-bottom: 50px;
+        }
+
+        .clients .section-title p {
+            color: var(--gray);
+        }
+
+        .clients-slider-wrapper {
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .clients-slider {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            width: fit-content;
+        }
+
+        .client-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 40px;
+            min-width: 200px;
+        }
+
+        .client-logo img {
+            max-height: 80px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .client-logo img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Pause animation on hover */
+        .clients-slider-wrapper:hover .clients-slider {
+            animation-play-state: paused;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .client-logo {
+                padding: 0 30px;
+                min-width: 150px;
+            }
+
+            .client-logo img {
+                max-height: 60px;
+            }
+
+            .clients {
+                padding: 60px 5% 40px;
+            }
+        }
+
+        /* Tambahkan di CSS Anda */
+        .mobile-hidden {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-hidden {
+                display: none;
+            }
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--cream);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h2 {
+            font-family: 'Milocha', cursive;
+            font-size: 2rem;
+            color: var(--fieldit-navy);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .contact-info p {
+            margin-bottom: 30px;
+            color: var(--dark-gray);
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-detail-item i {
+            margin-right: 15px;
+            color: var(--fieldit-mint);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .contact-detail-item h4 {
+            font-family: 'Milocha', cursive;
+            /* Font Milocha untuk sub-judul kontak */
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--fieldit-navy);
+        }
+
+        /* Contact Form Styles */
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--fieldit-navy);
+            font-family: 'Milocha', cursive;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--fieldit-mint);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            background-color: #082147;
+            color: var(--fieldit-navy);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-family: 'Milocha', cursive;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .submit-button:hover {
+            background-color: #2ad68a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--fieldit-navy);
+            color: var(--white);
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .footer-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+        }
+
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .footer-about {
+            max-width: 600px;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-links h3,
+        .footer-contact h3 {
+            font-family: 'Milocha', cursive;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-family: 'Milocha', cursive;
+            /* Font Milocha untuk link footer */
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--fieldit-mint);
+        }
+
+        .footer-contact p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            font-family: 'Milocha', cursive;
+            /* Font Milocha untuk kontak footer */
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            font-family: 'Milocha', cursive;
+            /* Font Milocha untuk copyright */
+        }
+
+        /* Floating WhatsApp Button */
+        .floating-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .wa-button {
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .wa-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .wa-button img {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+
+            /* PERBAIKAN HERO SECTION UNTUK MOBILE */
+            .hero {
+                padding: 100px 5% 80px;
+                min-height: 60vh;
+            }
+
+            .hero-bg::after {
+                background-size: cover;
+                background-position: center center;
+            }
+
+            .hero-bg::before {
+                background:
+                    linear-gradient(135deg, rgba(8, 33, 71, 0.75) 0%, rgba(26, 58, 107, 0.75) 100%);
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+                margin-bottom: 15px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+
+            .hero-content img {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 15px;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 14px;
+            }
+
+            /* Carousel adjustments for mobile */
+            .product-card {
+                margin: 0 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 50vh;
+                padding: 80px 5% 60px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .hero-content img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <!-- Logo Fieldit -->
+            <a href="index.html">
+                <img src="assets/logo/fieldit-1.png" alt="Fieldit Logo">
+            </a>
+        </div>
+
+        <!-- Tombol Bahasa Mobile - Hanya muncul di mobile -->
+        <button class="language-toggle-mobile" id="languageToggleMobile">
+            <i class="fas fa-globe"></i>
+            <span>ID</span>
+        </button>
+
+        <!-- Mobile Menu Toggle - Hanya muncul di mobile -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav>
+            <ul id="navMenu">
+                <!-- <li><a href="#home" data-en="Home" data-id="Beranda">Beranda</a></li> -->
+                <li><a href="#about" data-en="About Us" data-id="Tentang Kami">Tentang Kami</a></li>
+                <li><a href="#products" data-en="Products" data-id="Produk">Produk</a></li>
+                <!-- <li><a href="#features" data-en="Features" data-id="Fitur">Fitur</a></li> -->
+                <li><a href="#contact" data-en="Contact" data-id="Kontak">Kontak</a></li>
+                <li>
+                    <!-- Tombol Bahasa Desktop - Hanya muncul di desktop -->
+                    <button class="language-toggle" id="languageToggle">
+                        <i class="fas fa-globe"></i>
+                        <span>ID</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section - DIPERBAIKI -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo" style="width: 250px; height: 250px;">
+            <h1 data-en="Make Golf More Fun" data-id="Make Golf More Fun">Make Golf More Fun</h1>
+            <p data-en="Premium golf equipment with trendy design at reasonable prices. Perfect for beginners and enthusiasts alike."
+                data-id="Peralatan golf premium dengan desain trendi dan harga terjangkau. Sempurna untuk pemula dan penggemar golf.">
+                Premium golf equipment with trendy design at reasonable prices. Perfect for beginners and enthusiasts
+                alike.
+            </p>
+            <a href="#products" class="cta-button-home" data-en="Explore Products" data-id="Jelajahi Produk"
+                style="color: #ffffff;">Jelajahi Produk</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="section-title">
+            <img src="assets/logo/fieldit-1.png" alt="Fieldit Logo" style="width: 150px; height: 150px;">
+            <h2 data-en="About Fieldit" data-id="Tentang Fieldit" style="color: #4de89b;">Tentang Fieldit</h2>
+            <p data-en="Discover our commitment to excellence in golf equipment manufacturing"
+                data-id="Temukan komitmen kami terhadap keunggulan dalam pembuatan peralatan golf">
+                Temukan komitmen kami terhadap keunggulan dalam pembuatan peralatan golf
+            </p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <!-- <h3 style="color: #4de89b;">필드 안에서의 모든 것</h3> -->
+                <p data-en="Fieldit is a brand that develops affordable and accessible golf equipment. We believe that golf should be enjoyed by everyone."
+                    data-id="Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.">
+                    Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses.
+                    Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.
+                </p>
+                <p data-en="With a focus on trendy design and guaranteed quality, we provide products at reasonable prices for beginners and professional who usually face high barriers in golf equipment."
+                    data-id="Dengan fokus pada desain yang trendi dan kualitas terjamin, kami menyediakan produk-produk dengan harga yang masuk akal untuk pemula dan profesional yang biasanya menghadapi hambatan tinggi dalam peralatan golf.">
+                    Dengan fokus pada desain yang trendi dan kualitas terjamin, kami menyediakan produk-produk dengan
+                    harga yang masuk akal untuk pemula dan profesional yang biasanya menghadapi hambatan tinggi dalam
+                    peralatan golf.
+                </p>
+                <p data-en="Our logo uses golf ball lines that symbolize the planet, reflecting the brand's vision of continuously soaring high. The friendly symbolic expression lowers access barriers for consumers, reflecting the brand identity that provides affordable and accessible golf equipment."
+                    data-id="Logo kami menggunakan garis bola golf yang melambangkan planet, mencerminkan visi merek yang terus melambung tinggi. Ekspresi simbol yang ramah menurunkan hambatan akses bagi konsumen, mencerminkan identitas merek yang menyediakan peralatan golf dengan harga terjangkau dan mudah diakses.">
+                    Logo kami menggunakan garis bola golf yang melambangkan planet, mencerminkan visi merek yang terus
+                    melambung tinggi. Ekspresi simbol yang ramah menurunkan hambatan akses bagi konsumen, mencerminkan
+                    identitas merek yang menyediakan peralatan golf dengan harga terjangkau dan mudah diakses.
+                </p>
+            </div>
+            <div class="about-image">
+                <!-- About image placeholder -->
+                <img src="assets/about-fieldit.png" alt="Fieldit Golf Ball">
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section - CAROUSEL -->
+    <section id="products" class="products">
+        <div class="section-title">
+            <h2 data-en="Our Products" data-id="Produk Kami" style="color: #4de89b;">Produk Kami</h2>
+            <p data-en="Explore our range of premium golf equipment"
+                data-id="Jelajahi rangkaian peralatan golf premium kami">
+                Jelajahi rangkaian peralatan golf premium kami
+            </p>
+            <br>
+            <div>
+                <a href="shop.html" class="cta-button" data-en="View Our Products" data-id="Lihat Produk Kami"
+                    style="color: #ffffff;">Lihat Produk Kami</a>
+            </div>
+        </div>
+
+        <!-- Carousel Container -->
+        <div class="product-carousel">
+            <div class="product-track" id="productTrack">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/product/product-a-1200x250.png" alt="Product A">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-en="Product A" data-id="Produk A" style="color: #40e89b;">Produk A</h3>
+                        <p data-en="Maximize your distance with our advanced golf ball technology featuring optimized aerodynamics."
+                            data-id="Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika yang dioptimalkan.">
+                            Maksimalkan jarak Anda dengan teknologi bola golf canggih kami yang menampilkan aerodinamika
+                            yang dioptimalkan.
+                        </p>
+                        <!-- <div class="product-price">Rp 275.000</div>
+                        <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a> -->
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/product/coming-soon-product-b-1200x250.png" alt="Product B">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-en="Product B" data-id="Produk B" style="color: #40e89b;">Produk B</h3>
+                        <p data-en="Precision-crafted driver designed for consistent performance and exceptional feel on every shot."
+                            data-id="Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar biasa pada setiap pukulan.">
+                            Driver yang dibuat dengan presisi dirancang untuk performa konsisten dan feel yang luar
+                            biasa pada setiap pukulan.
+                        </p>
+                        <!-- <div class="product-price">Rp 2.150.000</div>
+                        <a href="#contact" class="cta-button" style="padding: 10px 25px; font-size: 14px;" data-en="Inquire" data-id="Tanya">Tanya</a> -->
+                    </div>
+                </div>
+                <!-- Additional product cards for demonstration -->
+                <!-- <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/pack-1.png" alt="Product C">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-en="Product C" data-id="Produk C" style="color: #40e89b;">Produk C</h3>
+                        <p data-en="Premium golf gloves with enhanced grip and comfort for better control and feel." 
+                           data-id="Sarung tangan golf premium dengan pegangan dan kenyamanan yang ditingkatkan untuk kontrol dan feel yang lebih baik.">
+                            Sarung tangan golf premium dengan pegangan dan kenyamanan yang ditingkatkan untuk kontrol dan feel yang lebih baik.
+                        </p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/pack-2.png" alt="Product D">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-en="Product D" data-id="Produk D" style="color: #40e89b;">Produk D</h3>
+                        <p data-en="High-performance golf shoes with advanced traction technology for stability during swings." 
+                           data-id="Sepatu golf berkinerja tinggi dengan teknologi traksi canggih untuk stabilitas selama ayunan.">
+                            Sepatu golf berkinerja tinggi dengan teknologi traksi canggih untuk stabilitas selama ayunan.
+                        </p>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- Carousel Navigation Dots -->
+            <div class="carousel-nav" id="carouselNav">
+                <!-- Dots will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-title">
+            <h2 data-en="Why Choose Fieldit" data-id="Mengapa Memilih Fieldit">Mengapa Memilih Fieldit</h2>
+            <p data-en="Discover what sets our golf equipment apart"
+                data-id="Temukan apa yang membedakan peralatan golf kami">
+                Temukan apa yang membedakan peralatan golf kami
+            </p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div>
+                    <!-- Icon placeholder -->
+                    <span style="color: var(--fieldit-navy); font-size: 30px;">⭐</span>
+                </div>
+                <h3 data-en="Reasonable Price" data-id="Harga Terjangkau" style="color: #4de89b;">Harga Terjangkau</h3>
+                <p data-en="High-quality products at affordable prices for all golf players."
+                    data-id="Produk berkualitas tinggi dengan harga terjangkau untuk semua kalangan pemain golf.">
+                    Produk berkualitas tinggi dengan harga terjangkau untuk semua kalangan pemain golf.
+                </p>
+            </div>
+            <div class="feature-item">
+                <div>
+                    <span style="color: var(--fieldit-navy); font-size: 30px;">⭐</span>
+                </div>
+                <h3 data-en="Trendy Design" data-id="Desain Trendi" style="color: #4de89b;">Desain Trendi</h3>
+                <p data-en="Latest stylish and modern design for the best appearance on the golf course."
+                    data-id="Desain terkini yang stylish dan modern untuk penampilan terbaik di lapangan golf.">
+                    Desain terkini yang stylish dan modern untuk penampilan terbaik di lapangan golf.
+                </p>
+            </div>
+            <div class="feature-item">
+                <div>
+                    <span style="color: var(--fieldit-navy); font-size: 30px;">⭐</span>
+                    <!-- <span style="color: var(--fieldit-navy); font-size: 30px;">⭐</span> -->
+                </div>
+                <h3 data-en="Premium Quality" data-id="Kualitas Premium" style="color: #4de89b;">Kualitas Premium</h3>
+                <p data-en="Best materials and cutting-edge technology for optimal performance when playing golf."
+                    data-id="Material terbaik dan teknologi mutakhir untuk performa optimal saat bermain golf.">
+                    Material terbaik dan teknologi mutakhir untuk performa optimal saat bermain golf.
+                </p>
+            </div>
+            <!-- <div class="feature-item">
+                <div class="feature-icon">
+                    <span style="color: var(--fieldit-navy); font-size: 30px;">🏆</span>
+                </div>
+                <h3 data-en="Easy Access" data-id="Akses Mudah">Akses Mudah</h3>
+                <p data-en="Making golf accessible to everyone with easily available products." 
+                   data-id="Membuat golf dapat diakses oleh semua orang dengan produk yang mudah didapatkan.">
+                    Membuat golf dapat diakses oleh semua orang dengan produk yang mudah didapatkan.
+                </p>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients">
+        <div class="section-title">
+            <h2 data-en="Our Clients" data-id="Klien Kami" style="color: #4de89b;">Klien Kami</h2>
+            <p data-en="Trusted by leading golf clubs and organizations"
+                data-id="Dipercaya oleh klub golf dan organisasi terkemuka">
+                Dipercaya oleh klub golf dan organisasi terkemuka
+            </p>
+        </div>
+        <div class="clients-slider-wrapper">
+            <div class="clients-slider">
+                <!-- First set of logos -->
+                <div class="client-logo">
+                    <img src="assets/clients/client-1.jpg" alt="Minima Golf">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-2.jpg" alt="Lotus Lakes Golf Club">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-3.jpg" alt="Green Tee Golf">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-4.jpg" alt="Leonian">
+                </div>
+                <!-- Add placeholder for 5th client when available -->
+                <!-- <div class="client-logo">
+                    <img src="assets/clients/client-5.jpg" alt="Client 5">
+                </div> -->
+
+                <!-- Second set - duplicate for seamless infinite scroll -->
+                <div class="client-logo">
+                    <img src="assets/clients/client-1.jpg" alt="Minima Golf">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-2.jpg" alt="Lotus Lakes Golf Club">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-3.jpg" alt="Green Tee Golf">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-4.jpg" alt="Leonian">
+                </div>
+                <!-- Add placeholder for 5th client when available -->
+                <!-- <div class="client-logo">
+                    <img src="assets/clients/client-5.jpg" alt="Client 5">
+                </div> -->
+
+                <!-- Third set - additional duplicate for extra smooth loop -->
+                <div class="client-logo">
+                    <img src="assets/clients/client-1.jpg" alt="Minima Golf">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-2.jpg" alt="Lotus Lakes Golf Club">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-3.jpg" alt="Green Tee Golf">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-4.jpg" alt="Leonian">
+                </div>
+                <!-- Add placeholder for 5th client when available -->
+                <!-- <div class="client-logo">
+                    <img src="assets/clients/client-5.jpg" alt="Client 5">
+                </div> -->
+
+                <!-- Fourth set - ensure no gap on any screen size -->
+                <div class="client-logo">
+                    <img src="assets/clients/client-1.jpg" alt="Minima Golf">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-2.jpg" alt="Lotus Lakes Golf Club">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-3.jpg" alt="Green Tee Golf">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/clients/client-4.jpg" alt="Leonian">
+                </div>
+                <!-- Add placeholder for 5th client when available -->
+                <!-- <div class="client-logo">
+                    <img src="assets/clients/client-5.jpg" alt="Client 5">
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="section-title">
+            <h2 data-en="Contact Us" data-id="Hubungi Kami" style="color: #4de89b;">Hubungi Kami</h2>
+            <p data-en="Get in touch with our team for inquiries and product information"
+                data-id="Hubungi tim kami untuk pertanyaan dan informasi produk">
+                Hubungi tim kami untuk pertanyaan dan informasi produk
+            </p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 data-en="FieldIt Services" data-id="Layanan FieldIt" style="color: #4de89b;" class="mobile-hidden">
+                    Layanan FieldIt</h2>
+                <!-- <p data-en="Have questions about our products or need assistance? Our team is here to help you find the perfect golf equipment for your game." 
+                data-id="Ada pertanyaan tentang produk kami atau butuh bantuan? Tim kami siap membantu Anda menemukan peralatan golf yang sempurna untuk permainan Anda."
+                class="mobile-hidden">
+                    Ada pertanyaan tentang produk kami atau butuh bantuan? Tim kami siap membantu Anda menemukan peralatan golf yang sempurna untuk permainan Anda.
+                </p> -->
+
+                <div class="contact-details">
+                    <div class="contact-detail-item">
+                        <i>⛳</i>
+                        <div>
+                            <h4 data-en="Indonesia" data-id="Indonesia">Indonesia</h4>
+                            <p>Soho Podomoro City Unit 2310, Jakarta Barat 11470.</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <i>⛳</i>
+                        <div>
+                            <h4 data-en="Australia" data-id="Australia">Australia</h4>
+                            <p>4/47 Cook Court North Lakes, Queensland 4509.</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <i>📞</i>
+                        <div>
+                            <h4 data-en="Phone" data-id="Telepon">Telepon</h4>
+                            <p>+62-811-1001-2597</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <i>📧</i>
+                        <div>
+                            <h4 data-en="Email" data-id="Email">Email</h4>
+                            <p>info@fieldit.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <center><a href="https://wa.me/6281110012597" class="cta-button" data-en="Contact via WhatsApp"
+                        data-id="Hubungi via WhatsApp" style="color: #ffffff;">Hubungi via WhatsApp</a></center>
+            </div>
+
+            <!-- Form Kontak menggantikan peta -->
+            <div class="contact-form">
+                <!-- <h3 data-en="Send Us a Message" data-id="Kirim Pesan kepada Kami">Kirim Pesan kepada Kami</h3> -->
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name" data-en="Full Name" data-id="Nama Lengkap">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" data-en="Email Address" data-id="Alamat Email">Alamat Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" data-en="Message" data-id="Pesan">Pesan</label>
+                        <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..."
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button" data-en="Send Message" data-id="Kirim Pesan"
+                        style="color: #ffffff;">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-main">
+                <!-- <div class="footer-logo">
+                    <img src="assets/logo/fieldit-3.png" alt="" style="width: 200px; height: 200px;">
+                </div> -->
+                <div class="footer-about">
+                    <img src="assets/logo/fieldit-3.png" alt="Fieldit Logo" style="width: 150px; height: 150px;">
+                    <p data-en="Fieldit is a brand that develops affordable and accessible golf equipment. We believe that golf should be enjoyed by everyone."
+                        data-id="Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah diakses. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.">
+                        Fieldit adalah merek yang mengembangkan peralatan golf dengan harga terjangkau yang mudah
+                        diakses. Kami percaya bahwa golf harus dapat dinikmati oleh semua orang.
+                    </p>
+                    <!-- <p><a style="color: #4be398;">필드 안에서의 모든 것</a> - Everything in the field</p> -->
+                    <p><a style="color: #4be398;">Make Golf More Fun</a></p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <h3 data-en="Quick Links" data-id="Tautan Cepat" style="color: #4be398;">Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="#home" data-en="Home" data-id="Beranda">Beranda</a></li>
+                        <li><a href="#about" data-en="About" data-id="Tentang">Tentang</a></li>
+                        <li><a href="#products" data-en="Products" data-id="Produk">Produk</a></li>
+                        <li><a href="#features" data-en="Features" data-id="Fitur">Fitur</a></li>
+                        <li><a href="#contact" data-en="Contact" data-id="Kontak">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h3 data-en="Contact Info" data-id="Info Kontak" style="color: #4be398;">Info Kontak</h3>
+                    <!-- <p>📍 Laks, Jl. Yos Sudarso No.84 6/11 6, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14360 Indonesia</p> -->
+                    <p>📞 +62-811-1001-2597</p>
+                    <p>📧 info@fieldit.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p style="color: #4be398;">&copy; 2025 Fieldit. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <!-- <div class="floating-wa">
+        <a href="https://wa.me/6281286506505" class="wa-button" target="_blank">
+            <i class="fab fa-whatsapp" style="color: white; font-size: 30px;"></i>
+        </a>
+    </div> -->
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', function () {
+            navMenu.classList.toggle('show');
+            // Mengubah ikon menu
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('show')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Language Toggle
+        const languageToggle = document.getElementById('languageToggle');
+        const languageToggleMobile = document.getElementById('languageToggleMobile');
+        let currentLanguage = 'id'; // Default language is Indonesian
+
+        function toggleLanguage() {
+            // Toggle language
+            currentLanguage = currentLanguage === 'id' ? 'en' : 'id';
+
+            // Update toggle button text
+            const toggleButtons = [languageToggle, languageToggleMobile];
+            toggleButtons.forEach(button => {
+                if (button) {
+                    const span = button.querySelector('span');
+                    span.textContent = currentLanguage === 'id' ? 'ID' : 'EN';
+                }
+            });
+
+            // Update all elements with data-id and data-en attributes
+            const translatableElements = document.querySelectorAll('[data-id], [data-en]');
+            translatableElements.forEach(element => {
+                if (currentLanguage === 'id') {
+                    if (element.hasAttribute('data-id')) {
+                        element.textContent = element.getAttribute('data-id');
+                    }
+                } else {
+                    if (element.hasAttribute('data-en')) {
+                        element.textContent = element.getAttribute('data-en');
+                    }
+                }
+            });
+
+            // Update placeholder for textarea
+            const messageTextarea = document.getElementById('message');
+            if (messageTextarea) {
+                messageTextarea.placeholder = currentLanguage === 'id' ? 'Tulis pesan Anda di sini...' : 'Write your message here...';
+            }
+        }
+
+        // Add event listeners to both language toggle buttons
+        if (languageToggle) {
+            languageToggle.addEventListener('click', toggleLanguage);
+        }
+
+        if (languageToggleMobile) {
+            languageToggleMobile.addEventListener('click', toggleLanguage);
+        }
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('show');
+                    mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+                    mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Account for fixed header
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Contact Form Handler
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Format message for WhatsApp
+            const whatsappMessage =
+                `Halo Fieldit, saya tertarik dengan produk Anda.%0A%0A` +
+                `*Nama:* ${name}%0A` +
+                `*Email:* ${email}%0A` +
+                `*Pesan:* ${message}`;
+
+            // WhatsApp number (replace with actual number)
+            const whatsappNumber = '6281110012597';
+
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+            // Open WhatsApp in new tab
+            window.open(whatsappURL, '_blank');
+
+            // Reset form
+            this.reset();
+
+            // Show success message
+            alert('Pesan Anda telah berhasil dikirim! Anda akan diarahkan ke WhatsApp.');
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // CAROUSEL FUNCTIONALITY
+        document.addEventListener('DOMContentLoaded', function () {
+            const track = document.getElementById('productTrack');
+            const cards = document.querySelectorAll('.product-card');
+            const nav = document.getElementById('carouselNav');
+            let currentIndex = 0;
+            let autoSlideInterval;
+
+            // Create navigation dots
+            cards.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('carousel-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    resetAutoSlide();
+                });
+                nav.appendChild(dot);
+            });
+
+            const dots = document.querySelectorAll('.carousel-dot');
+
+            // Function to go to specific slide
+            function goToSlide(index) {
+                currentIndex = index;
+                const translateX = -currentIndex * 100;
+                track.style.transform = `translateX(${translateX}%)`;
+
+                // Update active dot
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            // Function to go to next slide
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % cards.length;
+                goToSlide(currentIndex);
+            }
+
+            // Function to start auto sliding
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(nextSlide, 4000); // 4 seconds
+            }
+
+            // Function to reset auto slide timer
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+
+            // Start auto sliding
+            startAutoSlide();
+
+            // Pause auto sliding on hover
+            const carousel = document.querySelector('.product-carousel');
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                startAutoSlide();
+            });
+        });
+    </script>
+</body>
+
+</html>
